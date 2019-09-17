@@ -1,78 +1,78 @@
 <div class="container">
-  <div class="row justify-content-center"> 
+  <div class="row justify-content-center">
     <div class="card">
-        <div class="card-header">
-          Phylogenetic Inference and Visualization Online with GPU Acceleration 
+      <div class="card-header">
+        Phylogenetic Inference and Visualization Online with GPU Acceleration
+      </div>
+      <div class="card-body">
+        <carousel [interval]="4500">
+          <slide>
+            <img src="../../../assets/img/blueDnaFaded.jpg" alt="First slide"
+                 style="display: block; width: 900px; height:400px;">
+            <div class="carousel-caption d-none d-md-block">
+              <h2><strong>
+                Inference Algorithm Recommendation for Custom Datasets
+              </strong></h2>
+            </div>
+          </slide>
+          <slide>
+            <img src="../../../assets/img/eScienceFaded.jpg" alt="First slide"
+                 style="display: block; width: 900px; height:400px;">
+            <div class="carousel-caption d-none d-md-block">
+              <h2><strong>
+                Phylogenetic Inference with High Efficiency by GPU Accelaeration
+              </strong></h2>
+            </div>
+          </slide>
+          <slide>
+            <img src="../../../assets/img/treePicFaded.jpg" alt="First slide"
+                 style="display: block; width: 900px; height:400px;">
+            <div class="carousel-caption d-none d-md-block">
+              <h2><strong>
+                Numerous Layout Techniques for Tree Visualization
+              </strong></h2>
+            </div>
+          </slide>
+        </carousel>
+      </div>
+      <div class="card-footer">
+        <div class= "row justify-content-center">
+          <button class="btn btn-lg btn-primary btn-dark"
+                  type="button" routerLink="../upload-file">Get Started</button>
         </div>
-        <div class="card-body"> 
-          <carousel [interval]="4500">
-            <slide>
-              <img src="../../../assets/img/blueDnaFaded.jpg" alt="First slide" 
-              style="display: block; width: 900px; height:400px;">
-              <div class="carousel-caption d-none d-md-block">
-                <h2><strong> 
-                  Inference Algorithm Recommendation for Custom Datasets
-                </strong></h2>
-              </div>
-            </slide>
-            <slide>
-              <img src="../../../assets/img/eScienceFaded.jpg" alt="First slide" 
-              style="display: block; width: 900px; height:400px;">
-              <div class="carousel-caption d-none d-md-block">
-                <h2><strong>
-                  Phylogenetic Inference with High Efficiency by GPU Accelaeration
-                </strong></h2>
-              </div>
-            </slide>
-            <slide>
-              <img src="../../../assets/img/treePicFaded.jpg" alt="First slide" 
-              style="display: block; width: 900px; height:400px;">
-              <div class="carousel-caption d-none d-md-block">
-                <h2><strong>
-                  Numerous Layout Techniques for Tree Visualization 
-                </strong></h2>
-              </div>
-            </slide>
-          </carousel>
-          </div>
-          <div class="card-footer"> 
-            <div class= "row justify-content-center">
-              <button class="btn btn-lg btn-primary btn-dark" 
-              type="button" routerLink="../upload-file">Get Started</button>
-            </div> 
-          </div>
+      </div>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="col-sm-6 col-md-4">
       <div class="card">
         <div class="card-header">
-            <i class="cui-layers icons font-2xl"></i>Data Preprocessing
+          <i class="cui-layers icons font-2xl"></i>Data Preprocessing
         </div>
         <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+          Data Pre-processing consists of a data cleaning process in which issues in datasets that make it unusable are handled. Duplicate molecular sequences, incomplete datasets and noisy values can be listed as some of these issues. Data pre-processing is a vital part of effective phylogenetic analysis since it greatly affets the accuracy of phylogenetic inference utilizing a molecular dataset.
         </div>
       </div>
     </div><!--/.col-->
     <div class="col-sm-6 col-md-4">
       <div class="card">
         <div class="card-header">
-            <i class="cui-cog icons font-2xl"></i>Phylogenetic Inference
+          <i class="cui-cog icons font-2xl"></i>Phylogenetic Inference
         </div>
         <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+          Phylogenetic Inference is the process of generating a phylogenetic tree, which is a structure that represents the evolutionary relationships among a group of taxological units. This process can be accomplished in different ways. Maximum Likelihood, Bayesian Approach, Maximum Parsimony, Neighbor-Joining method and UPGMA method are the most prominant algorithms. The effectiveness of each algorithm depends on dataset features.
         </div>
       </div>
     </div><!--/.col-->
     <div class="col-sm-6 col-md-4">
       <div class="card">
         <div class="card-header">
-            <i class="cui-graph icons font-2xl"></i> Tree Visualization 
+          <i class="cui-graph icons font-2xl"></i> Tree Visualization
         </div>
         <div class="card-body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+          To review the results of phylogenetic inference, the visualization of the generated tree is essential. Many visualization layouts and techniques exist, such as cladograms/phylograms and rectangular/circular/radial, with different strengths and weaknesses. A visualization layout should be selected depending on the requirement of the phylogenetic analysis or the features of the dataset.
         </div>
       </div>
-    
+    </div>
   </div>
 </div>

@@ -41,6 +41,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileUploadService } from './file-upload.service';
+import { TreeViewerComponent } from './tree-viewer/tree-viewer.component';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import { FileUploadService } from './file-upload.service';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    FileUploadComponent
+    FileUploadComponent,
+    TreeViewerComponent
   ],
   providers: [{
     provide: LocationStrategy,
