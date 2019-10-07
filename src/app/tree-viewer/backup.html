@@ -1,0 +1,160 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="btn-group" dropdown>
+          <button class="btn btn-primary dropdown-toggle" dropdownToggle type="button">
+            upload your tree <span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem">
+              <button (click)="myModal.show()" class="btn btn-secondary mr-1" data-toggle="modal" type="button">
+                Click to paste your tree <span class="caret"></span>
+              </button>
+            </li>
+            <li role="menuitem">
+              <button class="btn btn-secondary mr-1" type="button"><input id="newick_file" type="file"/><span
+                class="caret"></span></button>
+            </li>
+          </ul>
+        </div>
+
+        <div #myModal="bs-modal" aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade"
+             role="dialog" tabindex="-1">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Paste your tree in Newick format:</h4>
+                <button (click)="myModal.hide()" aria-label="Close" class="close" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <textarea autofocus=true id='nwk_spec' placeholder="" rows=20 selectionEnd=1000 selectionStart=1
+                          style='width: 100%; height: 100%'>(a : 0.1, (b : 0.11, (c : 0.12, d : 0.13) : 0.14) : 0.15)</textarea>
+              </div>
+              <div class="modal-footer">
+                <button (click)="myModal.hide()" class="btn btn-secondary" type="button">Close</button>
+                <button class="btn btn-primary" id="validate_newick" type="button">Display tree</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="btn-group" dropdown>
+          <button class="btn btn-primary dropdown-toggle" dropdownToggle type="button">
+            Export tree<span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem"><a id="download-SVG">SVG</a></li>
+            <li role="menuitem"><a id="download-PDF">PDF</a></li>
+            <li role="menuitem"><a id="download-PNG">PNG</a></li>
+            <li role="menuitem"><a id="download-JPEG">JPEG</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class='tree_options'>
+          <p class='text_tree_options_title'> Tree Layout </p>
+          <div class='tree_disposition_wrapper'>
+            <div class='tree_disposition_1'>
+              <div>
+                <label>
+                  <input autocomplete="off" checked class="phylotree_branch_length" data-mode="phylogram"
+                         id="phylotree_branch_length_1" name="layout_options" title="Layout with branch length"
+                         type="radio">
+                  <p class='text_tree_options_content'> Phylogram </p>
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input autocomplete="off" class="phylotree_branch_length" data-mode="dendrogram"
+                         id="phylotree_branch_length_2" name="layout_options" title="Layout without branch length"
+                         type="radio">
+                  <p class='text_tree_options_content'> Dendrogram </p>
+                </label>
+              </div>
+            </div>
+            <div class='tree_disposition_line'></div>
+            <div class='tree_disposition_2'>
+              <div>
+                <label>
+                  <input autocomplete="off" checked class="phylotree-layout-mode" data-mode="step"
+                         id="phylotree_layout_mode_1" name="options_lay" title="Layout left-to-right" type="radio">
+                  <p class='text_tree_options_content'> Linear </p>
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input autocomplete="off" class="phylotree-layout-mode" data-mode="radial"
+                         id="phylotree_layout_mode_2" name="options_lay" title="Layout radially" type="radio">
+                  <p class='text_tree_options_content'> Radial </p>
+                </label>
+              </div>
+              <div>
+                <label>
+                  <input autocomplete="off" class="phylotree-layout-mode" data-mode="straight"
+                         id="phylotree_layout_mode_3" name="options_lay" title="Layout tree" type="radio">
+                  <p class='text_tree_options_content'> Slanted </p>
+                </label>
+              </div>
+            </div>
+          </div>
+          <p class='text_tree_options_title'> Tree ordering </p>
+          <div class='tree_ordering'>
+            <div>
+              <button class="btn btn-default btn-sm" id="sort_ascending" title="Sort deepest clades to the bottom"
+                      type="button">
+                <i aria-hidden="true" class="fa  fa-sort-amount-asc"></i>
+              </button>
+              <p class='text_tree_options_content'> Increasing ladderizing </p>
+            </div>
+            <div>
+              <button class="btn btn-default btn-sm" id="sort_descending" title="Sort deepsest clades to the top"
+                      type="button">
+                <i aria-hidden="true" class="fa  fa-sort-amount-desc "></i>
+              </button>
+              <p class='text_tree_options_content'> decreasing ladderizing </p>
+            </div>
+            <div>
+              <button class="btn btn-default btn-sm" id="sort_original" title="Restore original order" type="button">
+                <i aria-hidden="true" class="fa  fa-refresh"></i>
+              </button>
+              <p class='text_tree_options_content'> Retrieve original order </p>
+            </div>
+          </div>
+          <p class='text_tree_options_title'> Tree settings </p>
+          <div class='tree_manipulation'>
+            <div>
+              <input class="btn btn-default btn-sm" id="display_bootstrap"
+                     title="Display bootstrap (and other support values)" type="checkbox">
+              <p class='text_tree_options_content'> Display support values </p>
+            </div>
+            <div>
+              <input class="btn btn-default btn-sm" id="display_LB" title="Display Branch length" type="checkbox">
+              <p class='text_tree_options_content'> Display branch length </p>
+            </div>
+            <div>
+              <input class="btn btn-default btn-sm" id="align-toggler" title="Align tips labels to the edge of the plot"
+                     type="checkbox">
+              <p class='text_tree_options_content'> align text </p>
+            </div>
+          </div>
+          <div class='branch_filter_wrapper' id='branch_filter_wrapper'>
+            <p class='text_tree_options_search'> Search node </p>
+            <div>
+              <input class="form-control" id="branch_filter" placeholder="Search..." type="text">
+            </div>
+          </div>
+        </div>
+        <div class='tree-vis' id='tree_visualisation'>
+          <div class='tree-widget' id='tree_container'>
+          </div>
+          <div class='tree_zoom' id='tree_zoom'>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -68,8 +68,8 @@ export const navItems: NavData[] = [
     name: 'Tree Visualization'
   },
   {
-    name: 'Tree Layout selection',
-    url: '/layout',
+    name: 'Tree Visualization',
+    url: '/view-tree',
     icon: 'icon-graph',
   },
   {

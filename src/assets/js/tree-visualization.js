@@ -1,8 +1,4 @@
 
-
-
-
-
 function my_node_style_text(node, tree) {
   node['text-italic'] = !node['text-italic'];
   d3.layout.phylotree.trigger_refresh(tree);
@@ -14,6 +10,26 @@ function my_menu_title(node) {
   }
   return "Italicize node label";
 }
+
+function my_layout_switch(tree) {
+
+}
+
+$(".phylotree_branch_length").on("change", function (e) { // HERE
+  if ($(this).is(':checked')) {
+    if (branch_length_accept == true) {
+      branch_length_accept = false;
+      if (typeof new_json != 'undefined') {
+      }
+      tree.placenodes().update();
+    } else {
+      branch_length_accept = true;
+      if (typeof new_json != 'undefined') {
+      }
+      tree.placenodes().update();
+    }
+  }
+});
 
 function my_style_nodes(element, node) {
   element.style("font-style", node['text-italic'] ? "italic" : "normal");
@@ -41,9 +57,8 @@ function treeView(example_tree){
    })
    .size([height, width])
    .node_circle_size(0); // do not show "circles" at internal node
-    
 
-     
+
 // render to this SVG element
     tree(d3.layout.newick_parser(example_tree))
     // parse the Newick into a d3 hierarchy object with additional fields
@@ -65,7 +80,7 @@ function treeView(example_tree){
   );
 });
 
-    
- }
+
+}
 
 // layout and render the tree

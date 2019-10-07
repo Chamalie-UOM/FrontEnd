@@ -1,4 +1,200 @@
-<p>
+<!--p>
   tree-viewer works!
-</p>
-<svg id="tree_display" height="900" width="900" />
+</p-->
+
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <div class="input-group" dropdown>
+                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Import Tree<span
+                  class="caret"></span></button>
+                <div *dropdownMenu class="dropdown-menu">
+                  <input class="dropdown-item btn btn-sm " id="newick_file" type="file"/>
+                  <button (click)="myModal.show()" class="dropdown-item btn btn-sm" data-toggle="modal" type="submit">
+                    Click to paste your tree
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="input-group" dropdown>
+                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Export Tree
+                  <span class="caret"></span>
+                </button>
+                <div *dropdownMenu class="dropdown-menu">
+                  <a class="dropdown-item btn-sm" href="#">SVG</a>
+                  <a class="dropdown-item btn-sm" href="#">PDF</a>
+                  <a class="dropdown-item btn-sm" href="#">PNG</a>
+                  <a class="dropdown-item btn-sm" href="#">JPEG</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-header">
+          <strong>Choose Tree Layout Options</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <div class="form-check form-check-inline mr-1" id="inline-radios">
+                <input checked class="form-check-input btn-sm" data-mode="phylogram" id="phylogram" name="lay_op"
+                       title="Layout with branch length" type="radio" value="option1">
+                <label class="form-check-label btn-sm" for="phylogram">Phylogram</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input checked class="form-check-input btn-sm" data-mode="cladogram" id="cladogram" name="lay_op"
+                       title="Layout with branch length" type="radio" value="option2">
+                <label class="form-check-label btn-sm" for="cladogram">Cladogram</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <div class="form-check form-check-inline mr-1" id="pattern-radios">
+                <input checked class="form-check-input btn-sm" data-mode="step" id="linear" name="pat_op"
+                       title="Layout left-to-right" type="radio" value="option1">
+                <label class="form-check-label btn-sm" for="linear">Linear</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input class="form-check-input btn-sm" data-mode="radial" id="radial" name="pat_op"
+                       title="Layout radially" type="radio" value="option2">
+                <label class="form-check-label btn-sm" for="radial">Radial</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input class="form-check-input btn-sm" data-mode="straight" id="slanted" name="pat_op"
+                       title="Layout radially" type="radio" value="option2">
+                <label class="form-check-label btn-sm" for="radial">Slanted</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header ">
+          <strong>Tree Ladderizing Options</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <button class="btn btn-sm" id="sort_asc" title="Sort deepest clades to the bottom" type="button">
+                <i aria-hidden="true" class="fa  fa-sort-amount-asc"></i>Increase
+              </button>
+              <button class="btn btn-sm" id="sort_desc" title="Sort deepsest clades to the top" type="button">
+                <i aria-hidden="true" class="fa  fa-sort-amount-desc "></i>Decrease
+              </button>
+              <button class="btn btn-sm" id="sort_orig" title="Restore original order" type="button">
+                <i aria-hidden="true" class="fa  fa-refresh"></i> Reset
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-header">
+          <strong>Extra Options</strong>
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <div class="form-check">
+                <input class="form-check-input btn-sm" id="dis_value"
+                       title="Display bootstrap (and other support values)" type="checkbox" value="option1">
+                <label class="form-check-label btn-sm" for="dis_value">
+                  Display support values
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input btn-sm" id="dis_bl" title="Display Branch length" type="checkbox"
+                       value="option2">
+                <label class="form-check-label btn-sm" for="dis_bl">
+                  Display branch lengths
+                </label>
+              </div>
+              <div class="form-check checkbox">
+                <input class="form-check-input btn-sm" id="align" title="Align tips labels to the edge of the plot"
+                       type="checkbox" value="option3">
+                <label class="form-check-label btn-sm" for="align">
+                  Align text
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button class="btn btn-default btn-sm" data-amount='1' data-direction='vertical' id="expand_vert_space"
+                    title="Expand vertical spacing" type="button">
+              <i aria-hidden="true" class="fa fa-arrows-v"></i>
+            </button>
+            <button class="btn btn-default btn-sm" data-amount='1' data-direction='horizontal' id="expand_hori_space"
+                    title="Expand horizonal spacing" type="button">
+              <i aria-hidden="true" class="fa fa-arrows-h"></i>
+            </button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-default btn-sm" data-amount='-1' data-direction='vertical' id="compress_vert_space"
+                    title="Compress vertical spacing" type="button">
+              <i aria-hidden="true" class="fa  fa-compress fa-rotate-135"></i>
+            </button>
+            <button class="btn btn-default btn-sm" data-amount='-1' data-direction='horizontal' id="compress_hori_space"
+                    title="Compress horizonal spacing" type="button">
+              <i aria-hidden="true" class="fa  fa-compress fa-rotate-45"></i>
+            </button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-default btn-sm" id="enable_zoom" title="Display zoom function" type="button">
+              <i aria-hidden="true" class="fa fa-search"></i>
+            </button>
+            <button class="btn btn-default btn-sm" id="zoom_minus" title="Zoom minus on the tree" type="button">
+              <i aria-hidden="true" class="fa fa-search-minus"></i>
+            </button>
+            <button class="btn btn- btn-sm" id="zoom_plus" title="Zoom plus on the tree" type="button">
+              <i aria-hidden="true" class="fa fa-search-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <svg height="2800" id="tree_display" width="3500"/>
+      </div>
+    </div>
+
+    <!--modal-->
+    <div #myModal="bs-modal" aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" role="dialog"
+         tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Paste your tree in Newick format:</h4>
+            <button (click)="myModal.hide()" aria-label="Close" class="close" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <textarea autofocus=true id='nwk_spec' placeholder="" rows=20 selectionEnd=1000 selectionStart=1
+                      style='width: 100%; height: 100%'>(a : 0.1, (b : 0.11, (c : 0.12, d : 0.13) : 0.14) : 0.15)</textarea>
+          </div>
+          <div class="modal-footer">
+            <button (click)="myModal.hide()" class="btn btn-secondary" type="button">Close</button>
+            <button class="btn btn-primary" id="validate_newick" type="button">Display tree</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  </div>
+</div>
+
+<script>
+    load("(Spider:0.01181075,Woolly:0.02031041,(Howler:0.03929854,((Squirrel:0.05077519,((Titi:0.02039065,Saki:0.02150579)0.995000:0.01178676,(Owl:0.03086005,(PMarmoset:0.01874844,Tamarin:0.01911211)0.999000:0.01469246)0.647000:0.00280859)0.126000:0.00111146)0.000000:0.00000997,((Colobus:0.00277898,(DLangur:0.00480540,(Patas:0.01109996,((AGM_cDNA:0.00134656,Tant_cDNA:0.00134020)0.967000:0.00518035,(Rhes_cDNA:0.00599868,Baboon:0.00314482)0.947000:0.00414017)0.534000:0.00253701)0.999000:0.01241501)0.047000:0.00124937)1.000000:0.03072921,((Gorilla:0.00553042,(Human:0.00670980,Chimp:0.00209986)0.835000:0.00129494)0.974000:0.00707194,(Orangutan:0.01264025,Gibbon:0.02418947)0.699000:0.00150424)0.966000:0.01309323)1.000000:0.13111410)0.997000:0.01617515)0.968000:0.00854007);"); // Give the tree to our scripts. load_tree.js is the link between the HTML page and the phylotree.js code.
+</script>
+
+
+<!--
+###############################################################################################################################
+-->
+

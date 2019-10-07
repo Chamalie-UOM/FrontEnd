@@ -1,15 +1,16 @@
-var branch_length_accept = true;
-var zoom_value = 1;
-var presto = {};
+let branch_length_accept = true;
+let zoom_value = 1;
+let presto = {};
 
 presto.zoom_value = 1;
 presto.branch_length_accept = true;
 
-load = function(newick_content) {
-
+function load(newick_content) {
+  console.log("im in new");
     function  mySVGCheckFn()
     {
         var  bbox = $('svg')[0].getBBox();
+
 
         $('svg').attr("width", bbox.x + bbox.width + 70);
         $('svg').attr("height",bbox.y + bbox.height + 100);
@@ -24,7 +25,7 @@ load = function(newick_content) {
 
             reader.onload = (function (theFile) {
                 return function (e) {
-                    var res = d3_phylotree_newick_parser(e.target.result);
+                  var res = d3.layout.newick_parser(e.target.result);
 
                     if (res["json"]) {
                         if (!("children" in res["json"])) {
@@ -67,7 +68,7 @@ load = function(newick_content) {
     });
 
 
-    $(".phylotree-layout-mode").on("change", function (e) {
+  $(".form-check-input ").on("change", function (e) {
         if ($(this).is(':checked')) {
             if (tree.radial() != ($(this).data("mode") == "radial")) {
                 tree.radial(!tree.radial()).placenodes().update();
@@ -150,7 +151,7 @@ load = function(newick_content) {
     $("#validate_newick").on("click", function (e) {
         var res = d3_phylotree_newick_parser($('textarea[id$="nwk_spec"]').val(), true);
         if (res["error"] || !res["json"]) {
-            var warning_div = d3.select("#newick_body").selectAll("div  .alert-danger").data([res["error"]])
+          var warning_div = d3.select("#newick_body").selectAll("div  .alert-danger").data([res["error"]]);
             warning_div.enter().append("div");
             warning_div.html(function (d) {
                 return d;
@@ -180,7 +181,7 @@ load = function(newick_content) {
     var display_bootstrap = false;
     var display_LB = false;
 
-    $("#display_bootstrap").on("click", function (e) { // HERE : fonctionnalité d'affichage bootstrap / LB CHANGER DE PLACE ?
+    $("#display_bootstrap").on("click", function (e) { // HERE : fonctionnalitï¿½ d'affichage bootstrap / LB CHANGER DE PLACE ?
         if ($('#display_bootstrap').is(":checked")) {
             display_bootstrap = true;
         }
@@ -256,7 +257,7 @@ load = function(newick_content) {
             }
         );
 
-    var text_nwk = d3_phylotree_newick_parser(newick_content, true);
+  var text_nwk = d3.layout.newick_parser(newick_content, true);
 
     var container_id = '#tree_container';
 
