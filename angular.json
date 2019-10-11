@@ -25,8 +25,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
               "src/scss/style.scss",
-              "src/assets/css/phylotree.css",
-              "src/assets/css/phylotree_new.css"
+              "src/assets/css/phylotree.css"
 
             ],
             "stylePreprocessorOptions": {
@@ -38,9 +37,9 @@
               "src/assets/js/phylotree.js",
               "src/assets/js/tree-visualization.js",
               "src/assets/js/jquery.js",
-              "src/assets/js/load_tree.js",
               "src/assets/js/underscore.js",
-              "src/assets/js/underscore-min.js"
+              "src/assets/js/underscore-min.js",
+              "src/assets/js/bootstrap.min.js"
             ]
           },
           "configurations": {
