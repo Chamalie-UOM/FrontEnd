@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Latest compiled and minified CSS -->
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+  <!-- Optional theme -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="/phylotree.js"></script>
+
+  <link href="phylotree.css" rel="stylesheet">
+
+  <style>
+    .fa-rotate-45 {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    .fa-rotate-135 {
+      -webkit-transform: rotate(135deg);
+      -moz-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+      -o-transform: rotate(135deg);
+      transform: rotate(135deg);
+    }
+
+    @media (max-width: 1075px) {
+      .container {
+        padding-top: 50px;
+      }
+    }
+  </style>
+</head>
+
+<body style='padding-top: 70px;'>
+
+<!--
+###############################################################################################################################
+-->
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">phylotree.js</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Newick <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a data-target="#newick_modal" data-toggle="modal" href="#">Input Text</a></li>
+            <li><a href="#"><input id="newick_file" type="file"/></a></li>
+            <li class="divider"></li>
+            <li><a data-target="#newick_export_modal" data-toggle="modal" href="#">Export</a></li>
+          </ul>
+        </li>
+        <!--<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Display options <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" id = 'display_dengrogram'>Dendrogram</a></li>
+            <li><a href="#" id = 'display_tree'>Tree</a></li>
+             <li class="divider"></li>
+            <li><a href="#">Horizontal</a></li>
+            <li><a href="#">Vertical</a></li>
+          </ul>
+        </li>-->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Examples <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" id="example_hiv_scaled">HIV-1 RT</a></li>
+            <li><a href="#" id="example_influenza_color">Unscaled IAV HA colored by host</a></li>
+            <li><a href="#" id="example_NGS">NGS copy diversity</a></li>
+            <li><a href="#" id="example_GVZ">Compare NGS consensus</a></li>
+            <li><a href="#" id="example_hiv_compartments">HIV-1 env multiple timepoints and compartments</a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <div class="navbar-btn navbar-right">
+        <a class="btn btn-info" href="http://hyphy.org/resources/#labeling-branches-with-phylotree">Help</a>
+        <a class="btn btn-info" href="/documentation">Documentation</a>
+      </div>
+
+      <div class="form-group navbar-form navbar-right">
+        <input class="form-control" id='branch_filter' placeholder="Filter branches on" type="text">
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-4 navbar-right ">
+          <div class="navbar-form " role="search">
+            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+                            Tag <span class="caret"></span>
+                        </button>
+                          <ul class="dropdown-menu" id="selection_name_dropdown">
+                            <li id="selection_new"><a href="#">New selection set</a></li>
+                            <li class="disabled" id="selection_delete"><a href="#">Delete selection set</a></li>
+                            <li id="selection_rename"><a href="#">Rename selection set</a></li>
+                            <li class="divider"></li>
+                         </ul>
+                    </span>
+
+              <input class="form-control" disabled id="selection_name_box" type="text" value="Foreground">
+
+              <span class="input-group-btn" id="save_selection_name" style="display: none">
+                        <button class="btn btn-default" id="cancel_selection_button" type="button">
+                            Cancel
+                        </button>
+                        <button class="btn btn-default" id="save_selection_button" type="button">
+                            Save
+                        </button>
+                    </span>
+              <span class="input-group-btn">
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                type="button">Selection <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a href="#" id="filter_add">Add filtered nodes to selection</a></li>
+                            <li><a href="#" id="filter_remove">Remove filtered nodes from selection</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" id="select_all">Select all</a></li>
+                            <li><a href="#" id="select_all_internal">Select all internal nodes</a></li>
+                            <li><a href="#" id="select_all_leaves">Select all leaf nodes</a></li>
+                            <li><a href="#" id="clear_internal">Clear all internal nodes</a></li>
+                            <li><a href="#" id="clear_leaves">Clear all leaves</a></li>
+                            <li><a href="#" id="select_none">Clear selection</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" id="mp_label">Label internal nodes using maximum parsimony</a></li>
+                            <li><a href="#" id="and_label">Label internal nodes using conjunction (AND) </a></li>
+                            <li><a href="#" id="or_label">Label internal nodes using disjunction (OR) </a></li>
+                         </ul>
+                    </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="modal" id='newick_modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+        <h4 class="modal-title">Newick string to render</h4>
+      </div>
+      <div class="modal-body" id='newick_body'>
+        <textarea autofocus=true id='nwk_spec' placeholder="" rows=20 selectionEnd=1000 selectionStart=1
+                  style='width: 100%; height: 100%'>(a : 0.1, (b : 0.11, (c : 0.12, d : 0.13) : 0.14) : 0.15)</textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id='validate_newick' type="button">Display this tree</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class='container' id="main_display">
+
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group">
+          <button class="btn btn-default btn-sm" data-amount='1' data-direction='vertical'
+                  title="Expand vertical spacing" type="button">
+            <i class="fa fa-arrows-v"></i>
+          </button>
+          <button class="btn btn-default btn-sm" data-amount='-1' data-direction='vertical'
+                  title="Compress vertical spacing" type="button">
+            <i class="fa  fa-compress fa-rotate-135"></i>
+          </button>
+          <button class="btn btn-default btn-sm" data-amount='1' data-direction='horizontal'
+                  title="Expand horizonal spacing" type="button">
+            <i class="fa fa-arrows-h"></i>
+          </button>
+          <button class="btn btn-default btn-sm" data-amount='-1' data-direction='horizontal'
+                  title="Compress horizonal spacing" type="button">
+            <i class="fa  fa-compress fa-rotate-45"></i>
+          </button>
+          <button class="btn btn-default btn-sm" id="sort_ascending" title="Sort deepest clades to the bototm"
+                  type="button">
+            <i class="fa fa-sort-amount-asc"></i>
+          </button>
+          <button class="btn btn-default btn-sm" id="sort_descending" title="Sort deepsest clades to the top"
+                  type="button">
+            <i class="fa fa-sort-amount-desc"></i>
+          </button>
+          <button class="btn btn-default btn-sm" id="sort_original" title="Restore original order" type="button">
+            <i class="fa fa-sort"></i>
+          </button>
+        </div>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default active btn-sm">
+            <input autocomplete="off" checked class="phylotree-layout-mode" data-mode="linear" name="options"
+                   title="Layout left-to-right" type="radio"> Linear
+          </label>
+          <label class="btn btn-default  btn-sm">
+            <input autocomplete="off" class="phylotree-layout-mode" data-mode="radial" name="options"
+                   title="Layout radially" type="radio"> Radial
+          </label>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-default btn-sm active" id="toggle_animation" title="Toggle animation" type="button">
+            Animation
+          </button>
+        </div>
+
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default active btn-sm">
+            <input autocomplete="off" checked class="phylotree-align-toggler" data-align="left" name="options-align"
+                   title="Align tips labels to branches" type="radio"/>
+            <i class="fa fa-align-left"></i>
+          </label>
+          <label class="btn btn-default btn-sm">
+            <input autocomplete="off" class="phylotree-align-toggler" data-align="right" name="options-align"
+                   title="Align tips labels to the edge of the plot" type="radio"/>
+            <i class="fa fa-align-right"></i>
+          </label>
+        </div>
+
+        <label class="pull-right">Selected <span class="badge" id="selected_branch_counter">0</span> and filtered <span
+          class="badge" id="selected_filtered_counter">0</span> branches</label>
+
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class='tree-widget' id='tree_container'>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+###############################################################################################################################
+-->
+
+
+</body>
+</html>
