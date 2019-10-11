@@ -41,7 +41,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Data Cleaning',
-    url: '/preprocess-file',
+    url: '/upload-file',
     icon: 'icon-drop'
   },
   {
@@ -55,7 +55,6 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Recommendation',
-    url: '/upload-file',
     icon: 'icon-puzzle',
   },
   {

@@ -13,7 +13,7 @@ export class FileUploadService {
 
   public postFile(fileToUpload: FormData) {
 
-    const SERVER_URL = '/api/upload';
+    const SERVER_URL = '/api/preprocess';
     return this.httpClient.
     post<any>(SERVER_URL, fileToUpload, {
       reportProgress: true,
@@ -25,18 +25,18 @@ export class FileUploadService {
           const progress = Math.round(100 * event.loaded / event.total);
           return {status: 'progress', message: progress, data: ''};
         case HttpEventType.Response:
-          return {status: event.statusText, message: 0, data: (event.body.data).substr(1)}; // Substring taken to remove the leading '/' in the response.
+          return { status: event.statusText, message: 0, data: event.body.data };
         default:
-          return {status: event.type, message: 0, data: ''};
+          return { status: event.type, message: 0, data: '' };
       }
     })
     );
   }
 
-  public getRecommendation(path: string) {
+  public getRecommendation(data_id: string) {
 
     const SERVER_URL = '/api/recommend';
-    const params = new HttpParams().set('filepath', path);
+    const params = new HttpParams().set('id', data_id);
     return this.httpClient.
     get<any>(SERVER_URL, {
       reportProgress: true,

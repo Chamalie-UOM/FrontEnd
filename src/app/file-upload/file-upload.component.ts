@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TreeGenerationService } from '../tree-generation.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -9,25 +10,36 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FileUploadComponent implements OnInit {
   fileUploadService: FileUploadService;  
+  treeGenerationService: TreeGenerationService;
   fileToUpload: File;
   form: FormGroup;
-  recommendResponse = { status: undefined, message: undefined, algorithms: undefined };
+  recommendForm: FormGroup;
+  recommendResponse:Object;
   uploadResponse = { status: undefined, message: undefined, data: undefined };
+  treeResponse = {status: undefined, tree: undefined};
+  
 
   //constructor 
-  constructor(private formBuilder: FormBuilder, fileUploadService:FileUploadService) { 
+  constructor(private formBuilder: FormBuilder, fileUploadService:FileUploadService,
+    treeGenerationService: TreeGenerationService) { 
     this.fileUploadService = fileUploadService;
-    
+    this.treeGenerationService = treeGenerationService;
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       file: ['']
     });
+    this.recommendForm = this.formBuilder.group({
+      finalAlgorithm: ''
+    });
     var recommendResponse  = { status: '', message: 0, algorithms: undefined };
     this.recommendResponse = recommendResponse;
     var uploadResponse = { status: '', message: 0, data: undefined };
     this.uploadResponse = uploadResponse;
+    var treeResponse = { status: '', tree: undefined };
+    this.treeResponse= treeResponse;
+
   }
 
   //get the raw dataset
@@ -52,9 +64,18 @@ export class FileUploadComponent implements OnInit {
   }
 
   //obtain recommended algorithhms for the uploaded dataset from server.
-  recommend(path: string) {
-    this.fileUploadService.getRecommendation(path).subscribe(res =>{
+  recommend(data_id: string) {
+    this.fileUploadService.getRecommendation(data_id).subscribe(res =>{
       this.recommendResponse = res;
+    },error => {
+      console.log(error);
+    });
+  } 
+
+  onAlgoSelect() {
+    this.treeGenerationService.getTree(this.recommendForm.controls.finalAlgorithm.value)
+    .subscribe(res =>{
+      this.treeResponse = res;
     },error => {
       console.log(error);
     });

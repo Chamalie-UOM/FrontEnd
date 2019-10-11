@@ -13,8 +13,12 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <label for="file">Choose File</label>
           <input type="file" name="data" (change)="handleFileInput($event.target.files)" />
-          <button type="submit">Upload FASTA File</button>
-
+          <!--<button type="submit">Upload FASTA File</button> -->
+          <div class= "row justify-content-center">
+            <button class="btn btn-success"
+                    type="submit">Upload FASTA File</button>
+          </div>
+        </form>
           <!--uploading file-->
           <div>
             <div *ngIf="error">
@@ -35,7 +39,7 @@
             </div>
             <!--Success message for file upload-->
             <div *ngIf="uploadResponse.status==='Created'">
-              <span>Dataset Upload Completed Successfully</span>
+              <span>Dataset preprocessed and aligned successfully</span>
             </div>
         </div>
 
@@ -47,7 +51,7 @@
           <div *ngIf="recommendResponse.status === 'error'">
             {{ recommendResponse.message }}
           </div>
-          <div *ngIf="recommendResponse.status === 'progress'">
+          <!-- <div *ngIf="recommendResponse.status === 'progress'">
               <div class="progress md-progress" style="height: 12px;">
                 <div class="progress-bar bg-success" role="progressbar" ng-show= "True"
                 [style.width.%]="uploadResponse.message" 
@@ -56,14 +60,34 @@
                 </div>
                 <br><br>
               </div>
-          </div>
+          </div> -->
           <!--Display recommended algorithms-->
-          <div *ngIf="recommendResponse.status==='Created'">
-            <span>Recommended Algorithms:</span>
-            <strong>{{recommendResponse.algorithms}}</strong>
+          <div *ngIf="recommendResponse.status==='Created'" class="card">
+            <div class="card-header">
+                <span><strong>Recommended Algorithms:</strong></span>
+            </div>
+            <div class="card-body">
+              <!-- select final algorithm for inference -->
+              <form [formGroup]="recommendForm" (ngSubmit)="onAlgoSelect()">
+                  <div *ngFor="let algo of recommendResponse.algorithms">
+                    <label class=radio-inline>
+                      <input type="radio" [value]="algo" formControlName="finalAlgorithm">
+                      {{algo}}
+                    </label>
+                  </div>
+                  <button class="btn btn-lrg btn-success"
+                    type="submit">Upload FASTA File</button>
+              </form>
+            </div>
+            <div class="card-footer">
+              <!--Tree newick-->
+              <div *ngIf="treeResponse.status==='Created'">
+                <span>{{treeResponse.tree}}</span>
+              </div>
+            </div>
           </div>
+
         </div>
-      </form>
       </div>      
     </div>
   </div>
