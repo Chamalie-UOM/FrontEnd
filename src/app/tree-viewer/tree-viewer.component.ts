@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import * as svg from 'save-svg-as-png';
 
 declare function treeView(tree: string): any;
 
@@ -12,6 +13,9 @@ declare function displayBranchLength(checked: boolean): any;
 
 declare function sort(order: string): any;
 
+declare function validateTree(text: string): any;
+
+
 @Component({
   selector: 'app-tree-viewer',
   templateUrl: './tree-viewer.component.html',
@@ -22,7 +26,32 @@ export class TreeViewerComponent implements OnInit {
   tree = '(Spider:0.01181075,Woolly:0.02031041,(Howler:0.03929854,((Squirrel:0.05077519,((Titi:0.02039065,Saki:0.02150579)0.995000:0.01178676,(Owl:0.03086005,(PMarmoset:0.01874844,Tamarin:0.01911211)0.999000:0.01469246)0.647000:0.00280859)0.126000:0.00111146)0.000000:0.00000997,((Colobus:0.00277898,(DLangur:0.00480540,(Patas:0.01109996,((AGM_cDNA:0.00134656,Tant_cDNA:0.00134020)0.967000:0.00518035,(Rhes_cDNA:0.00599868,Baboon:0.00314482)0.947000:0.00414017)0.534000:0.00253701)0.999000:0.01241501)0.047000:0.00124937)1.000000:0.03072921,((Gorilla:0.00553042,(Human:0.00670980,Chimp:0.00209986)0.835000:0.00129494)0.974000:0.00707194,(Orangutan:0.01264025,Gibbon:0.02418947)0.699000:0.00150424)0.966000:0.01309323)1.000000:0.13111410)0.997000:0.01617515)0.968000:0.00854007);'; // Give the tree to our scripts. load_tree.js is the link between the HTML page and the phylotree.js code.
   dis_val = false;
   dis_bl = false;
+
+  // @ViewChild('tree_display') content: ElementRef;
+
   constructor() {
+  }
+
+  /**public downloadPDF() {
+    const doc = new JsPDF();
+    const specialElementHandler = {
+      '#editor':  function (element, renderer) {
+        return true;
+      }
+    };
+    const content = this.content.nativeElement;
+    doc.fromHTML(content.innerHTML, 15, 15 , {
+      'width': 190,
+      'elementHandlers': specialElementHandler
+    });
+    doc.save('test.pdf');
+  }**/
+  downloadNewick() {
+  }
+
+  downloadPNG() {
+    console.log('here');
+    svg.saveSvgAsPng(document.getElementById('tree_display'), 'diagram.png');
   }
   ngOnInit() {
 
@@ -50,8 +79,12 @@ export class TreeViewerComponent implements OnInit {
   displayBranchLengths(option: boolean) {
     displayBranchLength(option);
     this.dis_bl = option;
-
   }
+
+  /** Display(){
+    validateTree(text);
+  }**/
+
 
 
 }

@@ -8,6 +8,23 @@ let display_branch_length = false;
 function my_menu_title(node) {
 }
 
+/**function validateTree(){
+  $("#validate_newick").on("click", function (e) {
+    var res = d3.layout.newick_parser($('textarea[id$="nwk_spec"]').val(), true);
+    if (res["error"] || !res["json"]) {
+      var warning_div = d3.select("#newick_body").selectAll("div  .alert-danger").data([res["error"]]);
+      warning_div.enter().append("div");
+      warning_div.html(function (d) {
+        return d;
+      }).attr("class", "alert-danger");
+    } else {
+      default_tree_settings();
+      tree(res).svg(svg).layout();
+      $('#newick_modal').modal('hide');
+    }
+  });
+}**/
+
 
 function my_style_nodes(element, node) {
   element.style("font-style", node['text-italic'] ? "italic" : "normal");
@@ -139,4 +156,17 @@ function treeView(example_tree){
 
 
 }
+
+function download() {
+  $("#download-SVG").on("click", function (e) { // HERE : choix du format
+    var format = "svg";
+    var content = $("#tree_container").html();
+    var formulaire = $("<form id='formulaire_download' action='exportSVG.php' method='post'> <input type='hidden' name= 'content' value = '" + content + "'> <input type='hidden' name= 'format' value = '" + format + "' ><input type='hidden' name = 'file_name' value = 'file' ></form>");
+    $("body").append(formulaire);
+    var form_get = document.getElementById('formulaire_download');
+    form_get.submit();
+    form_get.parentNode.removeChild(form_get);
+  });
+}
+
 
