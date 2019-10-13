@@ -14,7 +14,8 @@
                 <button class="btn btn-primary btn-sm dropdown-toggle" dropdownToggle type="button">Import Tree<span
                   class="caret"></span></button>
                 <div *dropdownMenu class="dropdown-menu">
-                  <input class="dropdown-item btn btn-sm " id="newick_file" type="file"/>
+                  <input (change)="handleFileInput($event.target.files)" class="dropdown-item btn btn-sm "
+                         id="newick_file" type="file"/>
                   <button (click)="myModal.show()" class="dropdown-item btn btn-sm" data-toggle="modal" type="submit">
                     Click to paste your tree
                   </button>
@@ -61,17 +62,17 @@
                   <div class=" dropdown-item  form-check form-check-inline mr-1" id="pattern-radios">
                     <input (change)="pattern($event)" checked class="phylotree-layout-mode" data-mode="linear"
                            id="linear"
-                           name="pat_op" title="Layout left-to-right" type="radio" value="option1">
+                           name="pat_op" title="Layout left-to-right" type="radio" value="linear">
                     <label class="form-check-label btn-sm" for="linear">Linear</label>
                   </div>
                   <div class=" dropdown-item form-check form-check-inline mr-1">
                     <input (change)="pattern($event)" class="phylotree-layout-mode" data-mode="radial" id="radial"
-                           name="pat_op" title="Layout radially" type="radio" value="option2">
+                           name="pat_op" title="Layout radially" type="radio" value="radial">
                     <label class="form-check-label btn-sm" for="radial">Radial</label>
                   </div>
                   <div class=" dropdown-item  form-check form-check-inline mr-1">
                     <input (change)="pattern($event)" class="phylotree-layout-mode" data-mode="straight" id="straight"
-                           name="pat_op" title="Layout radially" type="radio" value="option3">
+                           name="pat_op" title="Layout radially" type="radio" value="straight">
                     <label class="form-check-label btn-sm" for="straight">Slanted</label>
                   </div>
                 </div>
@@ -84,7 +85,7 @@
                   class="caret"></span></button>
             </div>
           </div>
-          <div class="form-group-row">
+          <!--div class="form-group-row">
             <button (click)="direction($event)" class="btn btn-secondary btn-sm" data-amount='1'
                     data-direction='vertical' title="Expand vertical spacing" type="button">
               <i class="fa fa-arrows-v"></i>
@@ -119,39 +120,57 @@
             <button class="btn btn-secondary btn-sm" id="zoom_plus" title="Zoom plus on the tree" type="button">
               <i aria-hidden="true" class="fa fa-search-plus"></i>
             </button>
-          </div>
+          </div-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
           <div class="form-group row">
-            <svg #tree_display class="card align-middle" id="tree_display"/>
+            <svg #tree_display class="card" id="tree_display"/>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
       <!--modal-->
       <div #myModal="bs-modal" aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade"
            role="dialog"
            tabindex="-1">
-        <div class="modal-dialog" role="document">
+        <div [className]=modal_class role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Paste your tree in Newick format</h4>
+              <h4 class="modal-title">{{modal_title}}</h4>
               <button (click)="myModal.hide()" aria-label="Close" class="close" type="button">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-            <textarea autofocus=true id='nwk_spec' placeholder="" rows=20 selectionEnd=1000 selectionStart=1
-                      style='width: 100%; height: 100%'>(a : 0.1, (b : 0.11, (c : 0.12, d : 0.13) : 0.14) : 0.15)</textarea>
+              <label for='tree_text'></label><textarea autofocus=true id='tree_text' placeholder="" rows=10
+                                                       selectionEnd=1000 selectionStart=1
+                                                       style='width: 100%; height: 100%'>(a : 0.1, (b : 0.11, (c : 0.12, d : 0.13) : 0.14) : 0.15)</textarea>
             </div>
             <div class="modal-footer">
-              <button (click)="myModal.hide()" class="btn btn-secondary" type="button">Close</button>
-              <button class="btn btn-primary" id="validate_newick" type="button">Display tree</button>
+              <button (click)="myModal.hide()" class="btn btn-secondary" id="close_Modal" type="button">Close</button>
+              <button (click)="DisplayTree()" class="btn btn-secondary" id="validate_newick" type="button">Display
+                tree
+              </button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
-    </div>
-  </div>
-</div>
+
+
+
+
+
 
 
 

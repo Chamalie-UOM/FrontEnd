@@ -1,5 +1,5 @@
 let height = 600;
-let width = 1000;
+let width = 1200;
 let tree;
 let display_bootstrap = false;
 let display_branch_length = false;
@@ -157,16 +157,23 @@ function treeView(example_tree){
 
 }
 
-function download() {
-  $("#download-SVG").on("click", function (e) { // HERE : choix du format
-    var format = "svg";
-    var content = $("#tree_container").html();
-    var formulaire = $("<form id='formulaire_download' action='exportSVG.php' method='post'> <input type='hidden' name= 'content' value = '" + content + "'> <input type='hidden' name= 'format' value = '" + format + "' ><input type='hidden' name = 'file_name' value = 'file' ></form>");
-    $("body").append(formulaire);
-    var form_get = document.getElementById('formulaire_download');
-    form_get.submit();
-    form_get.parentNode.removeChild(form_get);
-  });
+function validateTree(text) {
+  let res = d3.layout.newick_parser(text, true);
+  if (res['error'] || !res['json']) {
+
+  } else {
+    treeView(text);
+  }
+  return res['error'];
+}
+
+function inputFileHandle(file) {
+  let reader = new FileReader();
+  reader.onload = function (e) {
+    console.log(e.target);
+    let res = d3.layout.newick_parser(e.target);
+
+  }
 }
 
 

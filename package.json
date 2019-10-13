@@ -1,7 +1,7 @@
 {
-  "name": "team-meraki",
+  "name": "@coreui/coreui-free-angular-admin-template",
   "version": "2.4.5",
-  "description": "PhyloGenie",
+  "description": "CoreUI Free Angular 2+ Admin Template",
   "author": {
     "name": "Łukasz Holeczek",
     "url": "http://holeczek.pl",
@@ -27,6 +27,7 @@
   },
   "private": true,
   "dependencies": {
+
     "@angular/animations": "^7.2.10",
     "@angular/common": "^7.2.10",
     "@angular/compiler": "^7.2.10",
@@ -36,7 +37,7 @@
     "@angular/platform-browser": "^7.2.10",
     "@angular/platform-browser-dynamic": "^7.2.10",
     "@angular/router": "^7.2.10",
-    "@coreui/angular": "^2.4.5",
+    "@coreui/angular": "2.4.5",
     "@coreui/coreui": "^2.1.8",
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
     "@coreui/icons": "0.3.0",
@@ -48,7 +49,6 @@
     "downloadjs": "^1.4.7",
     "flag-icon-css": "^3.3.0",
     "font-awesome": "^4.7.0",
-    "html-to-image": "^0.1.1",
     "jsdom": "^13.2.0",
     "jspdf": "^1.5.3",
     "moment": "^2.24.0",
