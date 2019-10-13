@@ -14,7 +14,7 @@
                 <button class="btn btn-primary btn-sm dropdown-toggle" dropdownToggle type="button">Import Tree<span
                   class="caret"></span></button>
                 <div *dropdownMenu class="dropdown-menu">
-                  <input (change)="handleFileInput($event.target.files)" class="dropdown-item btn btn-sm "
+                  <input (change)="handleFileInput($event.target)" class="dropdown-item btn btn-sm "
                          id="newick_file" type="file"/>
                   <button (click)="myModal.show()" class="dropdown-item btn btn-sm" data-toggle="modal" type="submit">
                     Click to paste your tree

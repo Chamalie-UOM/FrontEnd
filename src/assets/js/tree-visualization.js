@@ -167,13 +167,6 @@ function validateTree(text) {
   return res['error'];
 }
 
-function inputFileHandle(file) {
-  let reader = new FileReader();
-  reader.onload = function (e) {
-    console.log(e.target);
-    let res = d3.layout.newick_parser(e.target);
 
-  }
-}
 
 
