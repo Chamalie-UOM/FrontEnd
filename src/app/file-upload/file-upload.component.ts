@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TreeGenerationService } from '../tree-generation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-upload',
@@ -14,14 +15,14 @@ export class FileUploadComponent implements OnInit {
   fileToUpload: File;
   form: FormGroup;
   recommendForm: FormGroup;
-  recommendResponse:Object;
+  recommendResponse = {status: undefined,message:undefined, doc_id: undefined, algorithms: undefined};
   uploadResponse = { status: undefined, message: undefined, data: undefined };
   treeResponse = {status: undefined, tree: undefined};
   
 
   //constructor 
   constructor(private formBuilder: FormBuilder, fileUploadService:FileUploadService,
-    treeGenerationService: TreeGenerationService) { 
+    treeGenerationService: TreeGenerationService, private router: Router) { 
     this.fileUploadService = fileUploadService;
     this.treeGenerationService = treeGenerationService;
   }
@@ -33,7 +34,7 @@ export class FileUploadComponent implements OnInit {
     this.recommendForm = this.formBuilder.group({
       finalAlgorithm: ''
     });
-    var recommendResponse  = { status: '', message: 0, algorithms: undefined };
+    var recommendResponse  = { status: '', message: 0, algorithms: undefined, doc_id:undefined };
     this.recommendResponse = recommendResponse;
     var uploadResponse = { status: '', message: 0, data: undefined };
     this.uploadResponse = uploadResponse;
@@ -73,7 +74,8 @@ export class FileUploadComponent implements OnInit {
   } 
 
   onAlgoSelect() {
-    this.treeGenerationService.getTree(this.recommendForm.controls.finalAlgorithm.value)
+    this.treeGenerationService.getTree(this.recommendResponse.doc_id, 
+      this.recommendForm.controls.finalAlgorithm.value)
     .subscribe(res =>{
       this.treeResponse = res;
     },error => {

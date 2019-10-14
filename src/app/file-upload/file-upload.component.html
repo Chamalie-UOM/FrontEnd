@@ -75,7 +75,7 @@
                       {{algo}}
                     </label>
                   </div>
-                  <button class="btn btn-lrg btn-success"
+                  <button class="btn btn-success"
                     type="submit">Upload FASTA File</button>
               </form>
             </div>
@@ -83,6 +83,9 @@
               <!--Tree newick-->
               <div *ngIf="treeResponse.status==='Created'">
                 <span>{{treeResponse.tree}}</span>
+                <button class="btn btn-success"
+                    onclick="this.router.navigate(['/view-tree',{treeString: treeResponse.tree}])">
+                    Visualize Tree </button>
               </div>
             </div>
           </div>

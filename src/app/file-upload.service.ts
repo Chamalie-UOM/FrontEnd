@@ -47,11 +47,12 @@ export class FileUploadService {
       switch (event.type) {
         case HttpEventType.DownloadProgress:
           const progress = Math.round(100 * event.loaded / event.total);
-          return {status: 'progress', message: progress, algorithms: ''};
+          return {status: 'progress', message: progress, doc_id:'', algorithms: ''};
         case HttpEventType.Response:
-          return { status: event.statusText, message: 0, algorithms: event.body.algorithms };
+          return { status: event.statusText, message: 0, doc_id:event.body.doc_id,
+             algorithms: event.body.algorithms };
         default:
-          return { status: event.type, message: 0, algorithms: '' };
+          return { status: event.type, message: 0, doc_id:'', algorithms: '' };
       }
     })
     );
