@@ -10,10 +10,10 @@ export class TreeGenerationService {
   constructor(private httpClient: HttpClient,) {
   }
 
-  public getTree(algorithm: string) {
+  public getTree(doc_id: string, algorithm: string) {
 
     const SERVER_URL = '/api/getNewick';
-    const params = new HttpParams().set('algorithm', algorithm);
+    const params = new HttpParams().set('doc_id', doc_id).set('algorithm', algorithm);
     return this.httpClient.
     get<any>(SERVER_URL, {
       observe: 'events',
