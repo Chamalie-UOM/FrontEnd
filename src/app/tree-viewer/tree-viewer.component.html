@@ -1,0 +1,176 @@
+<!--svg id="tree_display" height="1200" width="2000" /-->
+<!--p>
+  tree-viewer works!
+</p-->
+
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-sm-1">
+              <div class="input-group" dropdown>
+                <button class="btn btn-primary btn-sm dropdown-toggle" dropdownToggle type="button">Import Tree<span
+                  class="caret"></span></button>
+                <div *dropdownMenu class="dropdown-menu">
+                  <input (change)="handleFileInput($event.target)" class="dropdown-item btn btn-sm "
+                         id="newick_file" type="file"/>
+                  <button (click)="myModal.show()" class="dropdown-item btn btn-sm" data-toggle="modal" type="submit">
+                    Click to paste your tree
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="input-group" dropdown>
+                <button class="btn btn-primary btn-sm dropdown-toggle" dropdownToggle type="button">Export Tree
+                  <span class="caret"></span>
+                </button>
+                <div *dropdownMenu class="dropdown-menu">
+                  <a (click)="downloadNewick()" class="dropdown-item btn-sm">NEWICK</a>
+                  <a (click)="downloadPNG()" class="dropdown-item btn-sm">PNG</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <div class="input-group" dropdown>
+                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Tree Layout<span
+                  class="caret"></span></button>
+                <div *dropdownMenu class="dropdown-menu">
+                  <div class="dropdown-item form-check form-check-inline mr-1" id="inline-radios">
+                    <input (change)="layout($event)" checked class="form-check-input btn-sm" data-mode="phylogram"
+                           id="phylogram"
+                           name="lay_op" title="Layout with branch length" type="radio" value="option1">
+                    <label class="form-check-label btn-sm" for="phylogram">Phylogram</label>
+                  </div>
+                  <div class="dropdown-item form-check form-check-inline mr-1">
+                    <input (change)="layout($event)" class="form-check-input btn-sm" data-mode="cladogram"
+                           id="cladogram"
+                           name="lay_op" title="Layout with branch length" type="radio" value="option2">
+                    <label class="form-check-label btn-sm" for="cladogram">Cladogram</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-1">
+              <div class="input-group" dropdown>
+                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Tree Pattern<span
+                  class="caret"></span></button>
+                <div *dropdownMenu class="dropdown-menu">
+                  <div class=" dropdown-item  form-check form-check-inline mr-1" id="pattern-radios">
+                    <input (change)="pattern($event)" checked class="phylotree-layout-mode" data-mode="linear"
+                           id="linear"
+                           name="pat_op" title="Layout left-to-right" type="radio" value="linear">
+                    <label class="form-check-label btn-sm" for="linear">Linear</label>
+                  </div>
+                  <div class=" dropdown-item form-check form-check-inline mr-1">
+                    <input (change)="pattern($event)" class="phylotree-layout-mode" data-mode="radial" id="radial"
+                           name="pat_op" title="Layout radially" type="radio" value="radial">
+                    <label class="form-check-label btn-sm" for="radial">Radial</label>
+                  </div>
+                  <div class=" dropdown-item  form-check form-check-inline mr-1">
+                    <input (change)="pattern($event)" class="phylotree-layout-mode" data-mode="straight" id="straight"
+                           name="pat_op" title="Layout radially" type="radio" value="straight">
+                    <label class="form-check-label btn-sm" for="straight">Slanted</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <button (click)="displayBranchLengths(!dis_bl)" class="btn btn-secondary btn-sm">Display branch
+                lengths<span
+                  class="caret"></span></button>
+            </div>
+          </div>
+          <!--div class="form-group-row">
+            <button (click)="direction($event)" class="btn btn-secondary btn-sm" data-amount='1'
+                    data-direction='vertical' title="Expand vertical spacing" type="button">
+              <i class="fa fa-arrows-v"></i>
+            </button>
+            <button (click)="direction($event)" class="btn btn-secondary btn-sm" data-amount='-1'
+                    data-direction='vertical' title="Compress vertical spacing" type="button">
+              <i class="fa  fa-compress fa-rotate-135"></i>
+            </button>
+            <button (click)="direction($event)" class="btn btn-secondary btn-sm" data-amount='1'
+                    data-direction='horizontal' title="Expand horizonal spacing" type="button">
+              <i class="fa fa-arrows-h"></i>
+            </button>
+            <button (click)="direction($event)" class="btn btn-secondary btn-sm" data-amount='-1'
+                    data-direction='horizontal' title="Compress horizonal spacing" type="button">
+              <i class="fa  fa-compress fa-rotate-45"></i>
+            </button>
+            <button (click)="sortOrder($event)" class="btn btn-secondary btn-sm" id="sort_ascending"
+                    title="Sort deepest clades to the bototm" type="button">
+              <i class="fa fa-sort-amount-asc"></i>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="sort_descending" title="Sort deepsest clades to the top"
+                    type="button">
+              <i class="fa fa-sort-amount-desc"></i>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="sort_original" title="Restore original order" type="button">
+              <i class="fa fa-sort"></i>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="zoom_minus" title="Zoom minus on the tree" type="button">
+              <i aria-hidden="true" class="fa fa-search-minus"></i>
+            </button>
+
+            <button class="btn btn-secondary btn-sm" id="zoom_plus" title="Zoom plus on the tree" type="button">
+              <i aria-hidden="true" class="fa fa-search-plus"></i>
+            </button>
+          </div-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group row">
+            <svg #tree_display class="card" id="tree_display"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!--modal-->
+      <div #myModal="bs-modal" aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade"
+           role="dialog"
+           tabindex="-1">
+        <div [className]=modal_class role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{modal_title}}</h4>
+              <button (click)="myModal.hide()" aria-label="Close" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <label for='tree_text'></label><textarea autofocus=true id='tree_text' placeholder="" rows=10
+                                                       selectionEnd=1000 selectionStart=1
+                                                       style='width: 100%; height: 100%'>(a : 0.1, (b : 0.11, (c : 0.12, d : 0.13) : 0.14) : 0.15)</textarea>
+            </div>
+            <div class="modal-footer">
+              <button (click)="myModal.hide()" class="btn btn-secondary" id="close_Modal" type="button">Close</button>
+              <button (click)="DisplayTree()" class="btn btn-secondary" id="validate_newick" type="button">Display
+                tree
+              </button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+
+
+
+
+
+
+
