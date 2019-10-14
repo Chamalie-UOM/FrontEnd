@@ -4,7 +4,8 @@ import * as svg from 'save-svg-as-png';
 
 import { saveAs } from 'file-saver';
 
-import { ActivatedRoute } from '@angular/router';  
+import { ActivatedRoute } from '@angular/router';
+import { ExportToDriveService} from '../export-to-drive.service';
 
 declare function treeView(tree: string): any;
 
@@ -44,16 +45,18 @@ export class TreeViewerComponent implements OnInit {
   tree: string;
   tree_id: string;
   file:File;
+  driveService: ExportToDriveService;
 
   // @ViewChild('tree_display') content: ElementRef;
 
-  constructor(private route:ActivatedRoute) {
+  constructor(private route: ActivatedRoute, driveService: ExportToDriveService ) {
     this.alert = '';
     this.dis_bl = false;
     this.modal_class = 'modal-dialog modal-success';
     this.modal_title = 'Paste your tree in Newick format';
     this.file_name = '_newick_tree';
     this.file_type = '';
+    this.driveService = driveService;
   }
 
   /**public downloadPDF() {
@@ -79,6 +82,11 @@ export class TreeViewerComponent implements OnInit {
 
   downloadPNG() {
     svg.saveSvgAsPng(document.getElementById('tree_display'), this.file_name + '.png');
+  }
+
+  saveToDrive(){
+    this.driveService.ExportToDrive(this.tree_id);
+
   }
   pattern(event: Event) {
     patternChange(event['srcElement']['dataset']['mode']);
@@ -132,7 +140,7 @@ export class TreeViewerComponent implements OnInit {
       const type = name_array[size - 1];
       if (type === 'tre' || type === 'nwk' || type ==='nw') {
         // console.log(type);
-        this.file_name = name_array[0] + this.file_name; 
+        this.file_name = name_array[0] + this.file_name;
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
           this.tree = (fileReader.result).toString();
