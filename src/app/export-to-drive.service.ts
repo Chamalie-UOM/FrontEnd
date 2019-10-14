@@ -14,17 +14,16 @@ export class ExportToDriveService {
     const SERVER_URL = '/api/export';
     const params = new HttpParams().set('tree_id', tree_id);
     return this.httpClient.
-    post<any>(SERVER_URL, tree_id, {
-      reportProgress: true,
+    post<any>(SERVER_URL,{
       observe: 'events',
       params : params
     })
       .pipe(map((event) => {
           switch (event.type) {
             case HttpEventType.Response:
-              return { status: event.statusText, message: 0, data: event.body.data };
+              return { status: event.statusText};
             default:
-              return { status: event.type, message: 0, data: '' };
+              return { status: event.type };
           }
         })
       );
