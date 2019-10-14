@@ -6,7 +6,6 @@ presto.zoom_value = 1;
 presto.branch_length_accept = true;
 
 function load(newick_content) {
-  console.log("im in new");
     function  mySVGCheckFn()
     {
         var  bbox = $('svg')[0].getBBox();
