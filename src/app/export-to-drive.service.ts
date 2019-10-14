@@ -11,17 +11,16 @@ export class ExportToDriveService {
 
   public ExportToDrive(tree_id: string) {
 
-    const SERVER_URL = '/api/drive_export';
+    const SERVER_URL = '/api/export';
+    const params = new HttpParams().set('tree_id', tree_id);
     return this.httpClient.
     post<any>(SERVER_URL, tree_id, {
       reportProgress: true,
-      observe: 'events'
+      observe: 'events',
+      params : params
     })
       .pipe(map((event) => {
           switch (event.type) {
-            case HttpEventType.UploadProgress:
-              const progress = Math.round(100 * event.loaded / event.total);
-              return {status: 'progress', message: progress, data: ''};
             case HttpEventType.Response:
               return { status: event.statusText, message: 0, data: event.body.data };
             default:
