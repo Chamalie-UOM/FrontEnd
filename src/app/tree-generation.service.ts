@@ -22,9 +22,9 @@ export class TreeGenerationService {
     .pipe(map((event) => {
       switch (event.type) {
         case HttpEventType.Response:
-          return { status: event.statusText, tree: event.body.tree };
+          return { status: event.statusText, tree: event.body.tree, tree_id:event.body.tree_id };
         default:
-          return { status: event.type, tree: '' };
+          return { status: event.type, tree: '', tree_id:'' };
       }
     })
     );

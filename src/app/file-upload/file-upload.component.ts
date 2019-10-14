@@ -18,7 +18,7 @@ export class FileUploadComponent implements OnInit {
   recommendForm: FormGroup;
   recommendResponse = {status: undefined,message:undefined, doc_id: undefined, algorithms: undefined};
   uploadResponse = { status: undefined, message: undefined, data: undefined };
-  treeResponse = {status: undefined, tree: undefined};
+  treeResponse = {status: undefined, tree: undefined, tree_id: undefined};
   methods = ["NJ", "UPGMA", "Maximum Parsimony", "Bayesian", "Maximum Likelihood"];
   optionalMethods: string[];
   
@@ -42,7 +42,7 @@ export class FileUploadComponent implements OnInit {
     this.recommendResponse = recommendResponse;
     var uploadResponse = { status: '', message: 0, data: undefined };
     this.uploadResponse = uploadResponse;
-    var treeResponse = { status: '', tree: undefined };
+    var treeResponse = { status: '', tree: undefined, tree_id: undefined };
     this.treeResponse= treeResponse;
     this.optionalMethods=[];
 
@@ -92,7 +92,7 @@ export class FileUploadComponent implements OnInit {
 
   //redirect to visualization page with the newick tree
   visualize() {
-    this.router.navigate(['/view-tree',{treeString: this.treeResponse.tree}]);
+    this.router.navigate(['/view-tree',{treeString: this.treeResponse.tree, tree_id: this.treeResponse}]);
   }
 
 }
