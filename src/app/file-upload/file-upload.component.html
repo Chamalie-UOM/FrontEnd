@@ -75,17 +75,29 @@
                       {{algo}}
                     </label>
                   </div>
-                  <button class="btn btn-success"
-                    type="submit">Upload FASTA File</button>
+                  <span><strong>Other Available Algorithms</strong></span>
+                  <div *ngFor="let method of optionalMethods">
+                    <label class=radio-inline>
+                      <input type="radio" [value]="method" formControlName="finalAlgorithm">
+                      {{method}}
+                    </label>
+                  </div>
+
+                  <div class= "row justify-content-center">
+                    <button class="btn btn-success"
+                      type="submit">Infer Tree</button>
+                  </div>
               </form>
             </div>
             <div class="card-footer">
               <!--Tree newick-->
               <div *ngIf="treeResponse.status==='Created'">
                 <span>{{treeResponse.tree}}</span>
-                <button class="btn btn-success"
-                    onclick="this.router.navigate(['/view-tree',{treeString: treeResponse.tree}])">
-                    Visualize Tree </button>
+                <div class= "row justify-content-center">
+                  <button class="btn btn-success"
+                      (click)="this.visualize();">
+                      Visualize Tree </button>
+                </div>
               </div>
             </div>
           </div>

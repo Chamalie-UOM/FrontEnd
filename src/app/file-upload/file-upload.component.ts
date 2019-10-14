@@ -12,17 +12,21 @@ import { Router } from '@angular/router';
 export class FileUploadComponent implements OnInit {
   fileUploadService: FileUploadService;  
   treeGenerationService: TreeGenerationService;
+  router: Router;
   fileToUpload: File;
   form: FormGroup;
   recommendForm: FormGroup;
   recommendResponse = {status: undefined,message:undefined, doc_id: undefined, algorithms: undefined};
   uploadResponse = { status: undefined, message: undefined, data: undefined };
   treeResponse = {status: undefined, tree: undefined};
+  methods = ["NJ", "UPGMA", "Maximum Parsimony", "Bayesian", "Maximum Likelihood"];
+  optionalMethods: string[];
   
 
   //constructor 
   constructor(private formBuilder: FormBuilder, fileUploadService:FileUploadService,
-    treeGenerationService: TreeGenerationService, private router: Router) { 
+    treeGenerationService: TreeGenerationService, router: Router) { 
+    this.router = router;
     this.fileUploadService = fileUploadService;
     this.treeGenerationService = treeGenerationService;
   }
@@ -40,6 +44,7 @@ export class FileUploadComponent implements OnInit {
     this.uploadResponse = uploadResponse;
     var treeResponse = { status: '', tree: undefined };
     this.treeResponse= treeResponse;
+    this.optionalMethods=[];
 
   }
 
@@ -68,11 +73,13 @@ export class FileUploadComponent implements OnInit {
   recommend(data_id: string) {
     this.fileUploadService.getRecommendation(data_id).subscribe(res =>{
       this.recommendResponse = res;
+      this.optionalMethods = this.methods.filter(item => this.recommendResponse.algorithms.indexOf(item) < 0);
     },error => {
       console.log(error);
     });
   } 
 
+  //post the selected algorithm for tree generation and get the newick tree
   onAlgoSelect() {
     this.treeGenerationService.getTree(this.recommendResponse.doc_id, 
       this.recommendForm.controls.finalAlgorithm.value)
@@ -81,6 +88,11 @@ export class FileUploadComponent implements OnInit {
     },error => {
       console.log(error);
     });
+  }
+
+  //redirect to visualization page with the newick tree
+  visualize() {
+    this.router.navigate(['/view-tree',{treeString: this.treeResponse.tree}]);
   }
 
 }
