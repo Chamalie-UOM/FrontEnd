@@ -20,6 +20,8 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {FileUploadService} from './file-upload.service';
+import {TreeGenerationService} from './tree-generation.service';
+import {ExportToDriveService} from './export-to-drive.service';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {ModalModule} from 'ngx-bootstrap';
 
@@ -59,7 +61,7 @@ const APP_CONTAINERS = [
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }, FileUploadService
+  }, FileUploadService, ExportToDriveService, TreeGenerationService
 ],
   bootstrap: [ AppComponent ]
 })
