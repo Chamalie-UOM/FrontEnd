@@ -63,7 +63,7 @@ function annotate(element, data) {
     var branch_length = element.selectAll(".attribute");
     if (branch_length.empty() && display_branch_length) {
       if (data.attribute.length >= 4) {
-        element.append("text").classed("attribute", true).text(data.attribute.substring(0, 4)).attr("dx", "-.6em").attr("text-anchor", "end").attr("alignment-baseline", "middle");
+        element.append("text").classed("attribute", true).text(data.attribute.substring(0, 6)).attr("dx", "-.6em").attr("text-anchor", "end").attr("alignment-baseline", "middle");
       } else {
         element.append("text").classed("attribute", true).text(data.attribute).attr("dx", "-.6em").attr("text-anchor", "end").attr("alignment-baseline", "middle");
 
@@ -134,7 +134,7 @@ function treeView(example_tree){
       'branches': 'linear'
     })
     .size([height, width])
-    .node_circle_size(3);
+    .node_circle_size(4.5);
 
   tree(d3.layout.newick_parser(example_tree))
     .style_nodes(my_style_nodes)
