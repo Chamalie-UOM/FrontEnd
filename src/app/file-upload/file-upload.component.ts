@@ -92,7 +92,7 @@ export class FileUploadComponent implements OnInit {
 
   //redirect to visualization page with the newick tree
   visualize() {
-    this.router.navigate(['/view-tree',{treeString: this.treeResponse.tree, tree_id: this.treeResponse}]);
+    this.router.navigate(['/view-tree',{treeString: this.treeResponse.tree, tree_id: this.treeResponse.tree_id}]);
   }
 
 }

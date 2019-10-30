@@ -14,7 +14,7 @@ export class ExportToDriveService {
     const SERVER_URL = '/api/export';
     const params = new HttpParams().set('tree_id', tree_id);
     return this.httpClient.
-    post<any>(SERVER_URL,{
+    post<any>(SERVER_URL,null,{
       observe: 'events',
       params : params
     })
