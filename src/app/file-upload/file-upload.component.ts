@@ -3,6 +3,7 @@ import { FileUploadService } from '../file-upload.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TreeGenerationService } from '../tree-generation.service';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-file-upload',
@@ -17,7 +18,7 @@ export class FileUploadComponent implements OnInit {
   form: FormGroup;
   recommendForm: FormGroup;
   recommendResponse = {status: undefined,message:undefined, doc_id: undefined, algorithms: undefined};
-  uploadResponse = { status: undefined, message: undefined, data: undefined };
+  uploadResponse = { status: undefined, message: undefined, data: undefined, msa:undefined };
   treeResponse = {status: undefined, tree: undefined, tree_id: undefined};
   methods = ["NJ", "UPGMA", "Maximum Parsimony", "Bayesian", "Maximum Likelihood"];
   optionalMethods: string[];
@@ -40,7 +41,7 @@ export class FileUploadComponent implements OnInit {
     });
     var recommendResponse  = { status: '', message: 0, algorithms: undefined, doc_id:undefined };
     this.recommendResponse = recommendResponse;
-    var uploadResponse = { status: '', message: 0, data: undefined };
+    var uploadResponse = { status: '', message: 0, data: undefined, msa:undefined };
     this.uploadResponse = uploadResponse;
     var treeResponse = { status: '', tree: undefined, tree_id: undefined };
     this.treeResponse= treeResponse;
@@ -67,6 +68,11 @@ export class FileUploadComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  downloadMsa() {
+    const blob = new Blob([this.uploadResponse.msa], { type: 'text/plain' });
+    saveAs(blob, 'aligned_dataset.fasta');
   }
 
   //obtain recommended algorithhms for the uploaded dataset from server.
