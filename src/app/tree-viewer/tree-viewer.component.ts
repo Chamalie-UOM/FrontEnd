@@ -28,7 +28,13 @@ declare function validateTree(text: string): any;
 })
 export class TreeViewerComponent implements OnInit {
 
-  // @ViewChild('tree_display') content: ElementRef;
+  ngOnInit() {
+    this.tree = this.route.snapshot.paramMap.get('treeString')
+    this.tree_id = this.route.snapshot.paramMap.get('tree_id')
+    console.log(this.tree_id)
+    treeView(this.tree);
+  }
+  // tree ="(SEQ62:0.1661606,SEQ63:1.997925,(SEQ59:0.8741253,((SEQ52:1.768247,SEQ56:0.7103593):0.4302503,SEQ55:0.7390158):0.899406,(((SEQ45:1.116803,SEQ44:0.4828632):0.3811023,SEQ48:0.5987513):0.6290859,SEQ41:2.474199,(SEQ40:0.6568392,(SEQ37:0.3804496,SEQ38:1.317509):0.5216154):0.7279741,((SEQ125:0.8645228,(SEQ118:0.6104883,(SEQ115:0.9587053,SEQ116:0.7849769):0.9826051):0.8377183):0.302855,SEQ122:0.7632705):1.071607,SEQ123:3.484421,SEQ119:2.934331,((SEQ77:1.24339,(SEQ79:0.4818331,SEQ80:0.4446161):0.5121906):0.2341909,(SEQ69:1.309472,SEQ73:0.9255321):0.5892236):0.4382497,SEQ76:2.013255,SEQ94:2.937748,(SEQ85:1.996606,(SEQ87:0.7506312,SEQ84:0.8998668):0.644757):0.5278071,(SEQ91:0.4247801,SEQ92:1.356658):2.01631,((SEQ28:1.092244,SEQ29:0.2923511):1.278406,SEQ22:1.686984):0.6285195,(SEQ24:1.047474,SEQ25:2.123456):1.122925,SEQ6:2.322726,(SEQ10:0.839624,SEQ7:1.017838):0.6918397,(SEQ17:0.4996546,(SEQ13:0.2023463,SEQ14:1.850393):1.337486):1.245647,SEQ104:1.270836,(SEQ103:0.9079436,(SEQ100:0.2938735,SEQ101:0.3308275):0.2781275,SEQ108:0.9277168):1.285547,(SEQ110:0.3575722,SEQ111:0.2154448):2.5728):1.835704):1.417468)";
 
   file_name;
   file: File;
@@ -84,10 +90,14 @@ export class TreeViewerComponent implements OnInit {
     svg.saveSvgAsPng(document.getElementById('tree_display'), this.file_name + '.png');
   }
 
-  saveToDrive() {
-    this.driveService.ExportToDrive(this.tree_id);
 
+  saveToDrive(){
+    console.log(this.tree_id);
+    this.driveService.ExportToDrive(this.tree_id).subscribe(res =>{
+      console.log(res);
+    });
   }
+
   pattern(event: Event) {
     patternChange(event['srcElement']['dataset']['mode']);
   }

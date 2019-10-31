@@ -23,11 +23,11 @@ export class FileUploadService {
       switch (event.type) {
         case HttpEventType.UploadProgress:
           const progress = Math.round(100 * event.loaded / event.total);
-          return {status: 'progress', message: progress, data: ''};
+          return {status: 'progress', message: progress, data: '', msa:'' };
         case HttpEventType.Response:
-          return { status: event.statusText, message: 0, data: event.body.data };
+          return { status: event.statusText, message: 0, data: event.body.data, msa:event.body.msa };
         default:
-          return { status: event.type, message: 0, data: '' };
+          return { status: event.type, message: 0, data: '', msa:'' };
       }
     })
     );
