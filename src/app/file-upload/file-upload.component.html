@@ -38,8 +38,17 @@
                 </div>
             </div>
             <!--Success message for file upload-->
-            <div *ngIf="uploadResponse.status==='Created'">
-              <span>Dataset preprocessed and aligned successfully</span>
+            <div *ngIf="uploadResponse.status==='Created'" >
+              <br>
+              <span class= "row justify-content-center">
+                <strong> Dataset preprocessed and aligned successfully</strong>
+              </span><br>
+              <div class= "row justify-content-center">
+                <a (click)="downloadMsa()" class= "btn btn-success">
+                  <strong>Download Aligned Dataset</strong>
+                  <i class="cui-cloud-download icons"></i>
+                </a><br>
+              </div>
             </div>
         </div>
 
