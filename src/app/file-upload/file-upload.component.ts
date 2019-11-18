@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FileUploadService } from '../file-upload.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { TreeGenerationService } from '../tree-generation.service';
-import { Router } from '@angular/router';
-import { saveAs } from 'file-saver';
+import {Component, OnInit} from '@angular/core';
+import {FileUploadService} from '../file-upload.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {TreeGenerationService} from '../tree-generation.service';
+import {Router} from '@angular/router';
+import {saveAs} from 'file-saver';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -45,11 +46,11 @@ export class FileUploadComponent implements OnInit {
     this.recommendForm = this.formBuilder.group({
       finalAlgorithm: ''
     });
-    let recommendResponse  = { status: '', message: 0, algorithms: undefined, doc_id: undefined };
+    const recommendResponse = {status: '', message: 0, algorithms: undefined, doc_id: undefined};
     this.recommendResponse = recommendResponse;
-    let uploadResponse = { status: '', message: 0, data: undefined, msa: undefined };
+    const uploadResponse = {status: '', message: 0, data: undefined, msa: undefined};
     this.uploadResponse = uploadResponse;
-    let treeResponse = { status: '', tree: undefined, tree_id: undefined };
+    const treeResponse = {status: '', tree: undefined, tree_id: undefined};
     this.treeResponse = treeResponse;
     this.optionalMethods = [];
 
