@@ -24,6 +24,7 @@ import {TreeGenerationService} from './tree-generation.service';
 import {ExportToDriveService} from './export-to-drive.service';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {ModalModule} from 'ngx-bootstrap';
+import { SafePipePipe } from './safe-pipe.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -56,7 +57,8 @@ const APP_CONTAINERS = [
     P404Component,
     P500Component,
     FileUploadComponent,
-    TreeViewerComponent
+    TreeViewerComponent,
+    SafePipePipe
   ],
   providers: [{
     provide: LocationStrategy,
