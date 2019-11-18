@@ -1,14 +1,31 @@
+// // Variable overrides
+// $body-bg:                               #212529;
+
+// //sidebar
+// $sidebar-bg:                            #2f353a;
+// $sidebar-nav-link-active-color:         #0dee42;
+// $sidebar-nav-link-active-bg:            #212529;
+// $sidebar-nav-link-active-icon-color:    #0dee42;
+// $sidebar-nav-link-hover-bg:             #212529;
+// $sidebar-nav-link-hover-color:          #03aa2a;
+// $sidebar-nav-link-hover-icon-color:     #03aa2a;
+ 
+
+// $carousel-caption-color:                #000502;
+
 // Variable overrides
-$body-bg:                               #212529;
+$body-bg: #f0f3f7;
 
 //sidebar
-$sidebar-bg: #3CB371;
-$sidebar-nav-link-active-color: #212529;
-$sidebar-nav-link-active-bg: #0dee42;
-$sidebar-nav-link-active-icon-color: #212529;
-$sidebar-nav-link-hover-bg: #0dee42;
+$sidebar-bg: rgb(176, 226, 142);
+$sidebar-nav-link-active-color: #080808;
+$sidebar-nav-link-active-bg: #09d137;
+$sidebar-nav-link-active-icon-color: #0b0c0c;
+$sidebar-nav-link-hover-bg: #04d434;
 $sidebar-nav-link-hover-color: #212529;
-$sidebar-nav-link-hover-icon-color: #212529;
-$sidebar-nav-link-color: #212529;
+$sidebar-nav-link-hover-icon-color: #07090c;
+$sidebar-nav-link-color: #1f1f24;
 
-$carousel-caption-color: #212529;
+$carousel-caption-color: #060707;
+
+$sidebar-nav-title-color: #060707;
