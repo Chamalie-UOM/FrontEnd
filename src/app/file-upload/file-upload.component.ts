@@ -8,6 +8,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -27,7 +28,8 @@ export class FileUploadComponent implements OnInit {
   optionalMethods: string[];
   url: any;
   inputData: any;
-  image: any;
+  imageData: any;
+  //blob: byte[];
 
 
   // constructor
@@ -70,6 +72,7 @@ export class FileUploadComponent implements OnInit {
       reader1.readAsText(event.target.files[0]);
       reader1.onload = (_event) => {
         this.inputData = reader1.result;
+
       };
       const documentDefinition = { content: this.inputData };
       const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
@@ -77,7 +80,18 @@ export class FileUploadComponent implements OnInit {
       pdfDocGenerator.getDataUrl((dataUrl) => {
         this.url = dataUrl;
       });
-
+      pdfDocGenerator.getBase64((data) => {
+        this.imageData = data; //covert PDF base64 format to PNG base64 format
+        var myFile:Blob=this.dataURItoBlob(this.imageData);
+        //this.url= 'data:image/png;base64,' + data; 
+        //console.log(this.imageData);
+        //var myFile:Blob=this.dataURItoBlob(this.imageData);
+        
+        //console.log(myFile);
+        //File.WriteAllBytes("fic.jpg", this.imageData)
+        //this.blob = Convert.FromBase64String(this.imageData);
+        //File.WriteAllBytes("fic.jpg", this.blob);
+      });
 
       // const reader = new FileReader();
       // reader.readAsDataURL(pdfMake.createPdf(documentDefinition).); // read file as data url
@@ -95,6 +109,16 @@ export class FileUploadComponent implements OnInit {
 
     }
   }
+  dataURItoBlob(dataURI) {
+    var binary = atob(dataURI);
+    var array = [];
+  for (var i = 0; i < binary.length; i++) {
+     array.push(binary.charCodeAt(i));
+  }
+ return new Blob([new Uint8Array(array)], {
+    type: 'image/jpg'
+});
+}
 
   // send dataset file to server and get progress
   onSubmit() {
