@@ -46,7 +46,6 @@ export const navItems: NavData[] = [
   },
   {
     name: 'MSA',
-    url: '/preprocess-file',
     icon: 'icon-pencil'
   },
   {
@@ -55,12 +54,11 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Recommendation',
-    icon: 'icon-puzzle',
+    icon: 'icon-puzzle'
   },
   {
     name: 'Tree Generation',
-    url: '/generate',
-    icon: 'icon-settings',
+    icon: 'icon-settings'
   },
   {
     title: true,
@@ -69,11 +67,11 @@ export const navItems: NavData[] = [
   {
     name: 'Tree Visualization',
     url: '/view-tree',
-    icon: 'icon-graph',
+    icon: 'icon-graph'
   },
   {
-    name: 'Download Tree File',
-    url: '/download',
-    icon: 'icon-cloud-download',
-  },
+    name: 'User Guide',
+    url: '/user-manual',
+    icon: 'icon-cloud-download'
+  }
 ];

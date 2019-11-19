@@ -33,6 +33,7 @@ export class FileUploadComponent implements OnInit {
   spinner1 = 'spinner1'; 
   spinner2 = 'spinner2';
   imageData: any;
+  documentUrl:any;
   //blob: byte[];
 
 
@@ -78,6 +79,7 @@ export class FileUploadComponent implements OnInit {
       reader1.onload = (_event) => {
         this.inputData = reader1.result;
         const documentDefinition = { content: this.inputData };
+        console.log(this.inputData);
         const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
         pdfDocGenerator.getDataUrl((dataUrl) => {
           this.url = dataUrl;
