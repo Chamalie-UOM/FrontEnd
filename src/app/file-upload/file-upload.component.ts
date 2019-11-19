@@ -72,17 +72,20 @@ export class FileUploadComponent implements OnInit {
       reader1.readAsText(event.target.files[0]);
       reader1.onload = (_event) => {
         this.inputData = reader1.result;
-
+        const documentDefinition = { content: this.inputData };
+        const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+        pdfDocGenerator.getDataUrl((dataUrl) => {
+          this.url = dataUrl;
+        });
       };
-      const documentDefinition = { content: this.inputData };
-      const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+      
 
-      pdfDocGenerator.getDataUrl((dataUrl) => {
-        this.url = dataUrl;
-      });
-      pdfDocGenerator.getBase64((data) => {
-        this.imageData = data; //covert PDF base64 format to PNG base64 format
-        var myFile:Blob=this.dataURItoBlob(this.imageData);
+      
+      // pdfDocGenerator.getBase64((data) => {
+      //   this.imageData = data; //covert PDF base64 format to PNG base64 format
+      //   var myFile:Blob=this.dataURItoBlob(this.imageData);
+
+
         //this.url= 'data:image/png;base64,' + data; 
         //console.log(this.imageData);
         //var myFile:Blob=this.dataURItoBlob(this.imageData);
@@ -91,7 +94,7 @@ export class FileUploadComponent implements OnInit {
         //File.WriteAllBytes("fic.jpg", this.imageData)
         //this.blob = Convert.FromBase64String(this.imageData);
         //File.WriteAllBytes("fic.jpg", this.blob);
-      });
+      // });
 
       // const reader = new FileReader();
       // reader.readAsDataURL(pdfMake.createPdf(documentDefinition).); // read file as data url
