@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TreeGenerationService } from '../tree-generation.service';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { NgxSpinnerService } from "ngx-spinner";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -28,11 +29,14 @@ export class FileUploadComponent implements OnInit {
   url: any;
   inputData: any;
   image: any;
+  spinner1 = 'spinner1'; 
+  spinner2 = 'spinner2';
 
 
   // constructor
   constructor(private formBuilder: FormBuilder, fileUploadService: FileUploadService,
-    treeGenerationService: TreeGenerationService, router: Router) {
+    treeGenerationService: TreeGenerationService, router: Router, 
+    private spinner: NgxSpinnerService) {
     this.router = router;
     this.fileUploadService = fileUploadService;
     this.treeGenerationService = treeGenerationService;
@@ -102,9 +106,11 @@ export class FileUploadComponent implements OnInit {
     formData.append('data', this.fileToUpload);
     this.fileUploadService.postFile(formData).subscribe(res => {
       this.uploadResponse = res;
+      this.showSpinner(this.spinner1);
       if (this.uploadResponse.status === 'Created') {
         this.recommend(this.uploadResponse.data);
-    }
+        this.hideSpinner(this.spinner1);
+      }
     }, error => {
       console.log(error);
     });
@@ -131,6 +137,10 @@ export class FileUploadComponent implements OnInit {
       this.recommendForm.controls.finalAlgorithm.value)
     .subscribe(res => {
       this.treeResponse = res;
+      this.showSpinner(this.spinner2);
+      if (this.treeResponse.status === 'Created') {
+        this.hideSpinner(this.spinner2);
+      }
     }, error => {
       console.log(error);
     });
@@ -139,6 +149,14 @@ export class FileUploadComponent implements OnInit {
   // redirect to visualization page with the newick tree
   visualize() {
     this.router.navigate(['/view-tree', {treeString: this.treeResponse.tree, tree_id: this.treeResponse.tree_id}]);
+  }
+
+  showSpinner(name: string) {
+    this.spinner.show(name);
+  }
+
+  hideSpinner(name: string) {
+    this.spinner.hide(name);
   }
 
 }

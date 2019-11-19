@@ -29,7 +29,7 @@
             <div *ngIf="uploadResponse.status === 'error'">
               {{ uploadResponse.message }}
             </div>
-            <div *ngIf="uploadResponse.status === 'progress'">
+            <!-- <div *ngIf="uploadResponse.status === 'progress'">
                 <div class="progress md-progress" style="height: 12px;">
                   <div class="progress-bar bg-success" role="progressbar" ng-show= "True"
                   [style.width.%]="uploadResponse.message"
@@ -38,8 +38,11 @@
                   </div>
                   <br><br>
                 </div>
-            </div>
+            </div> -->
             <!--Success message for file upload-->
+            <ngx-spinner [name]="spinner1">
+                <p style="font-size: 20px; color: white">Preprocessing Dataset...</p>
+            </ngx-spinner>
             <div *ngIf="uploadResponse.status==='Created'" >
               <br>
               <span class= "row justify-content-center">
@@ -101,6 +104,9 @@
               </form>
             </div>
             <div class="card-footer">
+              <ngx-spinner [name] = "spinner2">
+                  <p style="font-size: 20px; color: white">Generating Tree...</p>
+              </ngx-spinner>
               <!--Tree newick-->
               <div *ngIf="treeResponse.status==='Created'">
                 <span>{{treeResponse.tree}}</span>
