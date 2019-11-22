@@ -8,6 +8,7 @@ import {P500Component} from './views/error/500.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {UserManualComponent} from './user-manual/user-manual.component';
+import {FormatConverterComponent} from './format-converter/format-converter.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,13 @@ export const routes: Routes = [
         component: FileUploadComponent,
         data: {
           title: 'Upload Dataset File'
+        }
+      },
+      {
+        path: 'format-conversion',
+        component: FormatConverterComponent,
+        data: {
+          title: 'Convert Dataset Files'
         }
       },
       {

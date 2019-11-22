@@ -3,27 +3,8 @@ let width = 1200;
 let tree;
 let display_bootstrap = false;
 let display_branch_length = false;
+let branch_length_accept = true;
 
-
-function my_menu_title(node) {
-}
-
-/**function validateTree(){
-  $("#validate_newick").on("click", function (e) {
-    var res = d3.layout.newick_parser($('textarea[id$="nwk_spec"]').val(), true);
-    if (res["error"] || !res["json"]) {
-      var warning_div = d3.select("#newick_body").selectAll("div  .alert-danger").data([res["error"]]);
-      warning_div.enter().append("div");
-      warning_div.html(function (d) {
-        return d;
-      }).attr("class", "alert-danger");
-    } else {
-      default_tree_settings();
-      tree(res).svg(svg).layout();
-      $('#newick_modal').modal('hide');
-    }
-  });
-}**/
 
 
 function my_style_nodes(element, node) {
@@ -49,8 +30,21 @@ function layoutChange(layout) {
   if (layout === 'cladogram') {
     tree.options({'align-tips': true}, true);
   }
+  /**if (!branch_length_accept) {
+    branch_length_accept = true;
+    console.log(tree);
+    tree.placenodes.update()
+
+  } else {
+    branch_length_accept = false;
+    console.log(tree);
+    tree.placenodes().update();
+  }**/
+
 
 }
+
+
 
 function displayBranchLength(option) {
   display_branch_length = !!option;
@@ -146,7 +140,7 @@ function treeView(example_tree){
       d3.layout.phylotree.add_custom_menu(tree_node, // add to this node
         my_menu_title, // display this text for the menu
         function () {
-          my_node_style_text(tree_node, tree);
+          my_style_nodes(tree, tree_node);
         },
         // on-click callback include a reference to tree_node via transitive closure
         d3.layout.phylotree.is_leafnode // condition on when to display the menu

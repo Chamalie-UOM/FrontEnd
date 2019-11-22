@@ -39,13 +39,14 @@
                   class="caret"></span></button>
                 <div *dropdownMenu class="dropdown-menu">
                   <div class="dropdown-item form-check form-check-inline mr-1" id="inline-radios">
-                    <input (change)="layout($event)" checked class="form-check-input" data-mode="phylogram"
+                    <input (change)="layout($event)" autocomplete="off" checked class="form-check-input"
+                           data-mode="phylogram"
                            id="phylogram"
                            name="lay_op" title="Layout with branch length" type="radio" value="option1">
                     <label class="form-check-label " for="phylogram">Phylogram</label>
                   </div>
                   <div class="dropdown-item form-check form-check-inline mr-1">
-                    <input (change)="layout($event)" class="form-check-input " data-mode="cladogram"
+                    <input (change)="layout($event)" autocomplete="off" class="form-check-input " data-mode="cladogram"
                            id="cladogram"
                            name="lay_op" title="Layout with branch length" type="radio" value="option2">
                     <label class="form-check-label " for="cladogram">Cladogram</label>

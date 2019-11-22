@@ -24,10 +24,11 @@ import {TreeGenerationService} from './tree-generation.service';
 import {ExportToDriveService} from './export-to-drive.service';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {ModalModule} from 'ngx-bootstrap';
-import { SafePipePipe } from './safe-pipe.pipe';
-import { NgxSpinnerModule } from "ngx-spinner";
-import { UserManualComponent } from './user-manual/user-manual.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {SafePipePipe} from './safe-pipe.pipe';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {UserManualComponent} from './user-manual/user-manual.component';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
+import {FormatConverterComponent} from './format-converter/format-converter.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -64,7 +65,8 @@ const APP_CONTAINERS = [
     FileUploadComponent,
     TreeViewerComponent,
     SafePipePipe,
-    UserManualComponent
+    UserManualComponent,
+    FormatConverterComponent
   ],
   providers: [{
     provide: LocationStrategy,

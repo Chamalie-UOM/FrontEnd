@@ -45,6 +45,11 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
+    name: 'File Format Converter',
+    url: '/format-conversion',
+    icon: 'icon-pencil'
+  },
+  {
     name: 'MSA',
     icon: 'icon-pencil'
   },

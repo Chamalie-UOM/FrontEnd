@@ -93,6 +93,7 @@ export class TreeViewerComponent implements OnInit {
   }
 
   layout(event: Event) {
+    console.log(event);
     layoutChange(event['srcElement']['dataset']['mode']);
   }
 
