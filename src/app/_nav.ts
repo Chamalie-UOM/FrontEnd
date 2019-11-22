@@ -58,7 +58,8 @@ export const navItems: NavData[] = [
     name: 'Phylogenetic Inference'
   },
   {
-    name: 'Recommendation',
+    name: 'Inference Algorithms',
+    url: '/about',
     icon: 'icon-puzzle'
   },
   {

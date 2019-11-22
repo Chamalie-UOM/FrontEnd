@@ -29,6 +29,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {UserManualComponent} from './user-manual/user-manual.component';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {FormatConverterComponent} from './format-converter/format-converter.component';
+import { AboutComponent } from './about/about.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -66,6 +67,7 @@ const APP_CONTAINERS = [
     TreeViewerComponent,
     SafePipePipe,
     UserManualComponent,
+    AboutComponent,
     FormatConverterComponent
   ],
   providers: [{
