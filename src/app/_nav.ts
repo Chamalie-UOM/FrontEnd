@@ -45,8 +45,7 @@ export const navItems: NavData[] = [
     icon: 'icon-drop'
   },
   {
-    name: 'Multiple Sequence Alignment',
-    url: '/upload-file',
+    name: 'MSA',
     icon: 'icon-pencil'
   },
   {
@@ -54,14 +53,12 @@ export const navItems: NavData[] = [
     name: 'Phylogenetic Inference'
   },
   {
-    name: 'Tree Generation',
-    url: '/upload-file',
-    icon: 'icon-settings',
+    name: 'Recommendation',
+    icon: 'icon-puzzle'
   },
   {
-    name: 'Recommendation',
-    url: '/upload-file',
-    icon: 'icon-puzzle',
+    name: 'Tree Generation',
+    icon: 'icon-settings'
   },
   {
     title: true,
@@ -70,6 +67,11 @@ export const navItems: NavData[] = [
   {
     name: 'Tree Visualization',
     url: '/view-tree',
-    icon: 'icon-graph',
+    icon: 'icon-graph'
+  },
+  {
+    name: 'User Guide',
+    url: '/user-manual',
+    icon: 'icon-cloud-download'
   }
 ];

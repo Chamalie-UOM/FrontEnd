@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FileUploadService} from '../file-upload.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {TreeGenerationService} from '../tree-generation.service';
-import {Router} from '@angular/router';
-import {saveAs} from 'file-saver';
+import { Component, OnInit } from '@angular/core';
+import { FileUploadService } from '../file-upload.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TreeGenerationService } from '../tree-generation.service';
+import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
+import { NgxSpinnerService } from "ngx-spinner";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -29,13 +29,18 @@ export class FileUploadComponent implements OnInit {
   optionalMethods: string[];
   url: any;
   inputData: any;
+  image: any;
+  spinner1 = 'spinner1'; 
+  spinner2 = 'spinner2';
   imageData: any;
+  documentUrl:any;
   //blob: byte[];
 
 
   // constructor
   constructor(private formBuilder: FormBuilder, fileUploadService: FileUploadService,
-    treeGenerationService: TreeGenerationService, router: Router) {
+    treeGenerationService: TreeGenerationService, router: Router, 
+    private spinner: NgxSpinnerService) {
     this.router = router;
     this.fileUploadService = fileUploadService;
     this.treeGenerationService = treeGenerationService;
@@ -48,11 +53,11 @@ export class FileUploadComponent implements OnInit {
     this.recommendForm = this.formBuilder.group({
       finalAlgorithm: ''
     });
-    const recommendResponse = {status: '', message: 0, algorithms: undefined, doc_id: undefined};
+    let recommendResponse  = { status: '', message: 0, algorithms: undefined, doc_id: undefined };
     this.recommendResponse = recommendResponse;
-    const uploadResponse = {status: '', message: 0, data: undefined, msa: undefined};
+    let uploadResponse = { status: '', message: 0, data: undefined, msa: undefined };
     this.uploadResponse = uploadResponse;
-    const treeResponse = {status: '', tree: undefined, tree_id: undefined};
+    let treeResponse = { status: '', tree: undefined, tree_id: undefined };
     this.treeResponse = treeResponse;
     this.optionalMethods = [];
 
@@ -74,6 +79,7 @@ export class FileUploadComponent implements OnInit {
       reader1.onload = (_event) => {
         this.inputData = reader1.result;
         const documentDefinition = { content: this.inputData };
+        console.log(this.inputData);
         const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
         pdfDocGenerator.getDataUrl((dataUrl) => {
           this.url = dataUrl;
@@ -130,9 +136,11 @@ export class FileUploadComponent implements OnInit {
     formData.append('data', this.fileToUpload);
     this.fileUploadService.postFile(formData).subscribe(res => {
       this.uploadResponse = res;
+      this.showSpinner(this.spinner1);
       if (this.uploadResponse.status === 'Created') {
         this.recommend(this.uploadResponse.data);
-    }
+        this.hideSpinner(this.spinner1);
+      }
     }, error => {
       console.log(error);
     });
@@ -159,6 +167,10 @@ export class FileUploadComponent implements OnInit {
       this.recommendForm.controls.finalAlgorithm.value)
     .subscribe(res => {
       this.treeResponse = res;
+      this.showSpinner(this.spinner2);
+      if (this.treeResponse.status === 'Created') {
+        this.hideSpinner(this.spinner2);
+      }
     }, error => {
       console.log(error);
     });
@@ -167,6 +179,14 @@ export class FileUploadComponent implements OnInit {
   // redirect to visualization page with the newick tree
   visualize() {
     this.router.navigate(['/view-tree', {treeString: this.treeResponse.tree, tree_id: this.treeResponse.tree_id}]);
+  }
+
+  showSpinner(name: string) {
+    this.spinner.show(name);
+  }
+
+  hideSpinner(name: string) {
+    this.spinner.hide(name);
   }
 
 }

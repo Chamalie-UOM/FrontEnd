@@ -25,6 +25,9 @@ import {ExportToDriveService} from './export-to-drive.service';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {ModalModule} from 'ngx-bootstrap';
 import { SafePipePipe } from './safe-pipe.pipe';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { UserManualComponent } from './user-manual/user-manual.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -49,7 +52,9 @@ const APP_CONTAINERS = [
     ChartsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ModalModule
+    ModalModule,
+    NgxSpinnerModule,
+    PdfViewerModule
   ],
   declarations: [
     AppComponent,
@@ -58,7 +63,8 @@ const APP_CONTAINERS = [
     P500Component,
     FileUploadComponent,
     TreeViewerComponent,
-    SafePipePipe
+    SafePipePipe,
+    UserManualComponent
   ],
   providers: [{
     provide: LocationStrategy,
