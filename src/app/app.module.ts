@@ -28,6 +28,7 @@ import { SafePipePipe } from './safe-pipe.pipe';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { UserManualComponent } from './user-manual/user-manual.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AboutComponent } from './about/about.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -64,7 +65,8 @@ const APP_CONTAINERS = [
     FileUploadComponent,
     TreeViewerComponent,
     SafePipePipe,
-    UserManualComponent
+    UserManualComponent,
+    AboutComponent
   ],
   providers: [{
     provide: LocationStrategy,

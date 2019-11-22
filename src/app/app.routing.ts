@@ -8,6 +8,7 @@ import {P500Component} from './views/error/500.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {UserManualComponent} from './user-manual/user-manual.component';
+import { AboutComponent } from './about/about.component';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,13 @@ export const routes: Routes = [
         component: UserManualComponent,
         data: {
           title: 'User Manual'
+        }
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+        data: {
+          title: 'About Algorithms'
         }
       },
       {
