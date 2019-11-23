@@ -1,19 +1,98 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn" xmlns="http://www.w3.org/1999/html">
   <div class="card">
     <div class="card-header">
-      Upload File
+      Upload your Dataset file to Convert to preferred Format
     </div>
-    <div class="card-body">
-      <p>
-        Click the button below to upload your DNA or Protein Dataset in FASTA format for Preprocessing.
-      </p>
-    </div>
+    <form (ngSubmit)="formatConversion()" [formGroup]="formatConversionForm">
+      <div class="card-body">
 
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="data_type">Input Dataset Type</label>
+          <div class="col-md-9 col-form-label">
+            <div class="form-check form-check-inline mr-2" id="data_type">
+              <input checked class="form-check-input" formControlName="data_type" id="DNA" name="data_type" type="radio"
+                     value="dna">
+              <label class="form-check-label" for="DNA">DNA (Nucleotide)</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input class="form-check-input" formControlName="data_type" id="PROTEIN" name="data_type" type="radio"
+                     value="aa">
+              <label class="form-check-label" for="PROTEIN">Protein (Amino Acid)</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="inline-radios_in_type">Input File Format</label>
+          <div class="col-md-9 col-form-label">
+            <div class="form-check form-check-inline mr-2" id="inline-radios_in_type">
+              <input checked class="form-check-input" formControlName="input_format" id="fasta" name="input_format"
+                     type="radio" value="fasta">
+              <label class="form-check-label" for="fasta">FASTA</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input class="form-check-input" formControlName="input_format" id="phylip" name="input_format"
+                     type="radio" value="phylip">
+              <label class="form-check-label" for="phylip">PHYLIP</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input class="form-check-input" formControlName="input_format" id="nexus" name="input_format" type="radio"
+                     value="nexus">
+              <label class="form-check-label" for="nexus">NEXUS</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input class="form-check-input" formControlName="input_format" id="clustal" name="input_format"
+                     type="radio" value="clustal">
+              <label class="form-check-label" for="clustal">CLUSTAL</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="inline-radios_out_type">Output File Format</label>
+          <div class="col-md-9 col-form-label">
+            <div class="form-check form-check-inline mr-2" id="inline-radios_out_type">
+              <input class="form-check-input" formControlName="output_format" id="fasta_out" name="output_format"
+                     type="radio" value="fasta">
+              <label class="form-check-label" for="fasta_out">FASTA</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input checked class="form-check-input" formControlName="output_format" id="phylip_out"
+                     name="output_format" type="radio" value="phylip">
+              <label class="form-check-label" for="phylip_out">PHYLIP</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input class="form-check-input" formControlName="output_format" id="nexus_out" name="output_format"
+                     type="radio" value="nexus">
+              <label class="form-check-label" for="nexus_out">NEXUS</label>
+            </div>
+            <div class="form-check form-check-inline mr-2">
+              <input class="form-check-input" formControlName="output_format" id="clustal_out" name="output_format"
+                     type="radio" value="clustal">
+              <label class="form-check-label" for="clustal_out">CLUSTAL</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        Click the button to upload your DNA or Protein Dataset.
+        <input (change)="handleInputFile($event)" name="data" type="file"/>
+        <p align="right">
+          <button class="btn btn-success "
+                  type="submit"
+          >Upload Input File
+          </button>
+        </p>
+
+      </div>
+    </form>
     <div class="card-footer">
-      <p>
-        Click the button below to upload your DNA or Protein Dataset in FASTA format for Preprocessing.
+      Download the output file here.
+      <p align="right">
+        <button class="btn btn-success"
+                type="submit"
+        >Download Output File
+        </button>
       </p>
-
     </div>
 
   </div>

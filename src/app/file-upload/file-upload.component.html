@@ -15,11 +15,11 @@
           <input type="file" name="data" (change)="handleInputFile($event)"/>
          <!-- <img [src]="url | safe" height="200" *ngIf="url"> -->
           <iframe [src] = "url | safe" width = "600" height = "400" *ngIf="url"></iframe>
-          
+
           <!--<button type="submit">Upload FASTA File</button>  handleFileInput($event.target.files)-->
           <div class= "row justify-content-center">
             <button class="btn btn-success"
-                    type="submit" 
+                    type="submit"
                     placement="top"
                     ngbTooltip= "hello"
               >Upload FASTA File</button>
@@ -45,7 +45,7 @@
             </div> -->
             <!--Success message for file upload-->
             <ngx-spinner [name]="spinner1">
-                <p style="font-size: 20px; color: white">Preprocessing and Algining your Dataset...</p>
+              <p style="font-size: 20px; color: white">Pre processing and Aligning your Dataset...</p>
             </ngx-spinner>
             <div *ngIf="uploadResponse.status==='Created'" >
               <br>

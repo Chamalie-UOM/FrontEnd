@@ -9,7 +9,7 @@ import {FileUploadComponent} from './file-upload/file-upload.component';
 import {TreeViewerComponent} from './tree-viewer/tree-viewer.component';
 import {UserManualComponent} from './user-manual/user-manual.component';
 import {FormatConverterComponent} from './format-converter/format-converter.component';
-import { AboutComponent } from './about/about.component';
+import {AboutComponent} from './about/about.component';
 
 export const routes: Routes = [
   {
@@ -39,7 +39,7 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'upload-file',
+        path: 'phylogenetic-inference',
         component: FileUploadComponent,
         data: {
           title: 'Upload Dataset File'
@@ -67,7 +67,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'about',
+        path: 'algorithms',
         component: AboutComponent,
         data: {
           title: 'About Algorithms'
