@@ -85,15 +85,20 @@
 
       </div>
     </form>
-    <div class="card-footer">
-      Download the output file here.
-      <p align="right">
-        <button class="btn btn-success"
-                type="submit"
-        >Download Output File
-        </button>
-      </p>
+    <ngx-spinner>
+      <p style="font-size: 20px; color: white">Converting dataset format...</p>
+    </ngx-spinner>
+    <div *ngIf="convertResponse.status==='Created'" >
+      <div class="card-footer">
+        Download the output file here.
+        <p align="right">
+          <button class="btn btn-success"
+                  type="submit"
+                  (click)="downloadOutput()"
+          >Download Output File
+          </button>
+        </p>
+      </div>
     </div>
-
   </div>
 </div>

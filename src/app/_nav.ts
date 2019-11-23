@@ -36,14 +36,31 @@ export const navItems: NavData[] = [
     icon: 'icon-home',
   },
   {
-    name: 'Stepwise Phylogenetic Inference',
+    title: true,
+    name: 'Stepwise Process'
+  },
+  {
+    name: 'phylogenetic Inference',
     url: '/phylogenetic-inference',
     icon: 'icon-pencil'
+  },
+  {
+    title: true,
+    name: 'Other Features'
   },
   {
     name: 'File Format Converter',
     url: '/format-conversion',
     icon: 'icon-pencil'
+  },
+  {
+    name: 'Tree Visualization',
+    url: '/view-tree',
+    icon: 'icon-graph'
+  },
+  {
+    title: true,
+    name: 'Additional Information'
   },
   {
     name: 'MSA',
@@ -53,11 +70,6 @@ export const navItems: NavData[] = [
     name: 'Inference Algorithms',
     url: '/algorithms',
     icon: 'icon-puzzle'
-  },
-  {
-    name: 'Tree Visualization',
-    url: '/view-tree',
-    icon: 'icon-graph'
   },
   {
     name: 'User Guide',
