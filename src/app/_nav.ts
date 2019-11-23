@@ -42,7 +42,7 @@ export const navItems: NavData[] = [
   {
     name: 'phylogenetic Inference',
     url: '/phylogenetic-inference',
-    icon: 'icon-pencil'
+    icon: 'icon-settings'
   },
   {
     title: true,
@@ -64,7 +64,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'MSA',
-    icon: 'icon-pencil'
+    icon: 'icon-calculator'
   },
   {
     name: 'Inference Algorithms',
