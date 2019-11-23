@@ -374,7 +374,7 @@ var navItems = [
     },
     {
         name: 'Data Cleaning',
-        url: '/upload-file',
+      url: '/phylogenetic-inference',
         icon: 'icon-drop'
     },
     {
@@ -621,10 +621,10 @@ var routes = [
         },
         children: [
             {
-                path: 'upload-file',
+              path: 'phylogenetic-inference',
                 component: _file_upload_file_upload_component__WEBPACK_IMPORTED_MODULE_6__["FileUploadComponent"],
                 data: {
-                    title: 'Upload Dataset File'
+                  title: 'Step wise Phylogenetic Inference'
                 }
             },
             {
@@ -957,7 +957,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FileUploadComponent = /** @class */ (function () {
-    //constructor 
+  //constructor
     function FileUploadComponent(formBuilder, fileUploadService, treeGenerationService, router) {
         this.formBuilder = formBuilder;
         this.recommendResponse = { status: undefined, message: undefined, doc_id: undefined, algorithms: undefined };
@@ -989,7 +989,7 @@ var FileUploadComponent = /** @class */ (function () {
             this.fileToUpload = files[0];
         }
     };
-    //send dataset file to server and get progress 
+  //send dataset file to server and get progress
     FileUploadComponent.prototype.onSubmit = function () {
         var _this = this;
         var formData = new FormData();

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FileUploadService } from '../file-upload.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { TreeGenerationService } from '../tree-generation.service';
-import { Router } from '@angular/router';
-import { saveAs } from 'file-saver';
-import { NgxSpinnerService } from "ngx-spinner";
+import {Component, OnInit} from '@angular/core';
+import {FileUploadService} from '../file-upload.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {TreeGenerationService} from '../tree-generation.service';
+import {Router} from '@angular/router';
+import {saveAs} from 'file-saver';
+import {NgxSpinnerService} from 'ngx-spinner';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -30,17 +31,17 @@ export class FileUploadComponent implements OnInit {
   url: any;
   inputData: any;
   image: any;
-  spinner1 = 'spinner1'; 
+  spinner1 = 'spinner1';
   spinner2 = 'spinner2';
   imageData: any;
-  documentUrl:any;
-  //blob: byte[];
+  documentUrl: any;
+  // blob: byte[];
 
 
   // constructor
   constructor(private formBuilder: FormBuilder, fileUploadService: FileUploadService,
-    treeGenerationService: TreeGenerationService, router: Router, 
-    private spinner: NgxSpinnerService) {
+              treeGenerationService: TreeGenerationService, router: Router,
+              private spinner: NgxSpinnerService) {
     this.router = router;
     this.fileUploadService = fileUploadService;
     this.treeGenerationService = treeGenerationService;
@@ -53,11 +54,11 @@ export class FileUploadComponent implements OnInit {
     this.recommendForm = this.formBuilder.group({
       finalAlgorithm: ''
     });
-    let recommendResponse  = { status: '', message: 0, algorithms: undefined, doc_id: undefined };
+    const recommendResponse = {status: '', message: 0, algorithms: undefined, doc_id: undefined};
     this.recommendResponse = recommendResponse;
-    let uploadResponse = { status: '', message: 0, data: undefined, msa: undefined };
+    const uploadResponse = {status: '', message: 0, data: undefined, msa: undefined};
     this.uploadResponse = uploadResponse;
-    let treeResponse = { status: '', tree: undefined, tree_id: undefined };
+    const treeResponse = {status: '', tree: undefined, tree_id: undefined};
     this.treeResponse = treeResponse;
     this.optionalMethods = [];
 
@@ -79,28 +80,21 @@ export class FileUploadComponent implements OnInit {
       reader1.onload = (_event) => {
         this.inputData = reader1.result;
         const documentDefinition = { content: this.inputData };
-        console.log(this.inputData);
+        // console.log(this.inputData);
         const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
         pdfDocGenerator.getDataUrl((dataUrl) => {
           this.url = dataUrl;
         });
       };
-      
 
-      
-      // pdfDocGenerator.getBase64((data) => {
-      //   this.imageData = data; //covert PDF base64 format to PNG base64 format
-      //   var myFile:Blob=this.dataURItoBlob(this.imageData);
+      // this.url= 'data:image/png;base64,' + data;
+      // console.log(this.imageData);
+      // var myFile:Blob=this.dataURItoBlob(this.imageData);
 
-
-        //this.url= 'data:image/png;base64,' + data; 
-        //console.log(this.imageData);
-        //var myFile:Blob=this.dataURItoBlob(this.imageData);
-        
-        //console.log(myFile);
-        //File.WriteAllBytes("fic.jpg", this.imageData)
-        //this.blob = Convert.FromBase64String(this.imageData);
-        //File.WriteAllBytes("fic.jpg", this.blob);
+      // console.log(myFile);
+      // File.WriteAllBytes("fic.jpg", this.imageData)
+      // this.blob = Convert.FromBase64String(this.imageData);
+      // File.WriteAllBytes("fic.jpg", this.blob);
       // });
 
       // const reader = new FileReader();
@@ -120,9 +114,9 @@ export class FileUploadComponent implements OnInit {
     }
   }
   dataURItoBlob(dataURI) {
-    var binary = atob(dataURI);
-    var array = [];
-  for (var i = 0; i < binary.length; i++) {
+    const binary = atob(dataURI);
+    const array = [];
+    for (let i = 0; i < binary.length; i++) {
      array.push(binary.charCodeAt(i));
   }
  return new Blob([new Uint8Array(array)], {

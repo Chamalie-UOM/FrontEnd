@@ -1,34 +1,48 @@
 <div class="callout callout-success justify-content-center">
   <strong class="h2 color">Know Your Algorithms</strong><br>
-  <strong class="h6 color">There are numerous methods to achieve phylogenetic inference. We provide five of the most popular algorithms for your selection. PhyloGenie will recommend the most suitable algorithms for your dataset. Read below to make the informed decision yourself.</strong>
+  <strong class="h5 color">There are numerous methods to achieve phylogenetic inference. We provide five of the most
+    popular algorithms for your selection. PhyloGenie will recommend the most suitable algorithms for your dataset. Read
+    below to make the informed decision yourself.</strong>
 </div>
 
-<div class="row">
-  <div class="callout callout-info b-t-1 b-r-1 b-b-1">
-    <strong class="h4 color"><em>Neighbor-Joining Method</em></strong><br><br>
-    <div class ="color">Neighbor-joining method is a distance based algorithm renowned for its relatively high speed. It works by calculating the dissimilarity/distance matrix by getting the pair-wise distances between each of the sequences in the dataset, and attempting to find the  tree topology that best fit those distances. Commonly used for larger datasets to get faster results, although it works poorly for highly divergent datasets and is less accurate than character-based methods. Preferrend for its simplicity, high speed and competence for larger datasets. </div>
+<div class="row card-body">
+  <div class="callout callout-success b-t-1 b-r-1 b-b-1">
+    <strong class="h4 color"><em>Neighbor-Joining Method (NJ)</em></strong><br><br>
+    <div class="color">Neighbor-joining method is a distance based algorithm renowned for its relatively high speed. It
+      works by calculating the dissimilarity/distance matrix by getting the pair-wise distances between each of the
+      sequences in the dataset, and attempting to find the tree topology that best fit those distances. Commonly used
+      for larger datasets to get faster results, although it works poorly for highly divergent datasets and is less
+      accurate than character-based methods. Preferrend for its simplicity, high speed and competence for larger
+      datasets.
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="callout callout-info b-t-1 b-r-1 b-b-1">
-    <strong class="h4 color"><em>Unweighted Pair Group Method with Arithmatic Mean (UPGMA)</em></strong><br><br>
+
+<div class="row card-body">
+  <div class="callout callout-success b-t-1 b-r-1 b-b-1">
+    <strong class="h4 color"><em>Unweighted Pair Group Method with Arithmetic Mean (UPGMA)</em></strong><br><br>
     <div class ="color">UPGMA is a distance-based algorithm very similar to Neighbor-Joining method in its operation. Unlike Neighbor-Joining, UPGMA assumes an ultra-metric tree following the moleculr clock concept. It is preferred for its fast computation and high competence with large datasets. It is comonly used for datasets with high similarity. On the other hand, UPGMA, like Nighbor-Joining, only takes the genetic distances between sequences into consideration, giving less accurate results than character-based methods.  </div>
   </div>
 </div>
-<div class="row">
-  <div class="callout callout-info b-t-1 b-r-1 b-b-1">
+<div class="row card-body">
+  <div class="callout callout-success b-t-1 b-r-1 b-b-1">
     <strong class="h4 color"><em>Maximum Likelihood</em></strong><br><br>
-    <div class ="color">Maximum Likelihood is a character-based algorithm that takes the likelihood of a tree tolopgy as the optimality criterion and tries to maximize it to get the best estimate of the true tree. Very popular due to its highly accurate results. Takes each site change into consideration and works well even for highly divergent datasets. It is a based on an evolutionary model. But comparatively slow due to its complex computations. It is often used for DNA datasets and sequences with less or unclear similarity.</div>
+    <div class="color">Maximum Likelihood is a character-based algorithm that takes the likelihood of a tree topology as
+      the optimality criterion and tries to maximize it to get the best estimate of the true tree. Very popular due to
+      its highly accurate results. Takes each site change into consideration and works well even for highly divergent
+      datasets. It is a based on an evolutionary model. But comparatively slow due to its complex computations. It is
+      often used for DNA datasets and sequences with less or unclear similarity.
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="callout callout-info b-t-1 b-r-1 b-b-1">
+<div class="row card-body">
+  <div class="callout callout-success b-t-1 b-r-1 b-b-1">
     <strong class="h4 color"><em>Maximum Parsimony</em></strong><br><br>
     <div class ="color">maximum Parsimony is a character-based algorithm that operates following the hypothesis, that the simpllest explaination is the most probable explaination. In other words it considers the tree with least amount of evolutionary changes (sum of character shanges at each site) as the best estimate or the most parsimonious tree. Mathematically precise calculations provide accurate results and since it is not model-based. Maximum Parsimony performs best for small datasets with hight similarity. It is not feasible for large dataset due to slow calculations.</div>
   </div>
 </div>
-<div class="row">
-  <div class="callout callout-info b-t-1 b-r-1 b-b-1">
+<div class="row card-body">
+  <div class="callout callout-success b-t-1 b-r-1 b-b-1">
     <strong class="h4 color"><em>Bayesian Approach</em></strong><br><br>
     <div class ="color">Bayesian Approach is a character-based algorithm that also uses a liklyhood function to get the best tree estimate. But unlike Maximum Likelihood, it assigns a probability distribution to nuisance parameters rather than keeping them constant and uses an MCMC search to find the optimal trees. It works best for Protein datasets. Uses all sequence information giving accurate results. It can be used for highly divergent datasets as well. But it is computationally intensive and is better for small datasets than large ones.</div>
   </div>

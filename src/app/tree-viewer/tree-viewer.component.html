@@ -1,7 +1,3 @@
-<!--svg id="tree_display" height="1200" width="2000" /-->
-<!--p>
-  tree-viewer works!
-</p-->
 
 <div class="animated fadeIn">
   <div class="row">
@@ -11,12 +7,12 @@
           <div class="form-group row">
             <div class="col-sm-auto">
               <div class="input-group" dropdown>
-                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Import Tree<span
+                <button class="btn  dropdown-toggle" dropdownToggle type="button">Import Tree<span
                   class="caret"></span></button>
                 <div *dropdownMenu class="dropdown-menu">
-                  <input (change)="handleFileInput($event.target)" class="dropdown-item btn btn-success btn-sm "
+                  <input (change)="handleFileInput($event.target)" class="dropdown-item btn "
                          id="newick_file" type="file"/>
-                  <button (click)="myModal.show()" class="dropdown-item btn btn-success btn-sm" data-toggle="modal" type="submit">
+                  <button (click)="myModal.show()" class="dropdown-item btn" data-toggle="modal" type="submit">
                     Click to paste your tree
                   </button>
                 </div>
@@ -24,31 +20,32 @@
             </div>
             <div class="col-sm-auto">
               <div class="input-group" dropdown>
-                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Export Tree
+                <button class="btn dropdown-toggle" dropdownToggle type="button">Export Tree
                   <span class="caret"></span>
                 </button>
                 <div *dropdownMenu class="dropdown-menu">
-                  <a (click)="downloadNewick()" class="dropdown-item btn btn-success btn-sm">NEWICK</a>
-                  <a (click)="downloadPNG()" class="dropdown-item btn btn-success btn-sm">PNG</a>
+                  <a (click)="downloadNewick()" class="dropdown-item btn ">NEWICK</a>
+                  <a (click)="downloadPNG()" class="dropdown-item btn ">PNG</a>
                 </div>
               </div>
             </div>
             <div class="col-sm-auto">
               <div class="input-group" dropdown>
-                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Tree Layout<span
+                <button class="btn dropdown-toggle" dropdownToggle type="button">Tree Layout<span
                   class="caret"></span></button>
                 <div *dropdownMenu class="dropdown-menu">
                   <div class="dropdown-item form-check form-check-inline mr-1" id="inline-radios">
-                    <input (change)="layout($event)" checked class="form-check-input btn-sm" data-mode="phylogram"
+                    <input (change)="layout($event)" autocomplete="off" checked class="form-check-input"
+                           data-mode="phylogram"
                            id="phylogram"
                            name="lay_op" title="Layout with branch length" type="radio" value="option1">
-                    <label class="form-check-label btn-success btn-sm" for="phylogram">Phylogram</label>
+                    <label class="form-check-label " for="phylogram">Phylogram</label>
                   </div>
                   <div class="dropdown-item form-check form-check-inline mr-1">
-                    <input (change)="layout($event)" class="form-check-input btn-sm" data-mode="cladogram"
+                    <input (change)="layout($event)" autocomplete="off" class="form-check-input " data-mode="cladogram"
                            id="cladogram"
                            name="lay_op" title="Layout with branch length" type="radio" value="option2">
-                    <label class="form-check-label btn-success btn-sm" for="cladogram">Cladogram</label>
+                    <label class="form-check-label " for="cladogram">Cladogram</label>
                   </div>
                 </div>
               </div>
@@ -56,36 +53,36 @@
 
             <div class="col-sm-auto">
               <div class="input-group" dropdown>
-                <button class="btn btn-success btn-sm dropdown-toggle" dropdownToggle type="button">Tree Pattern<span
+                <button class="btn dropdown-toggle" dropdownToggle type="button">Tree Pattern<span
                   class="caret"></span></button>
                 <div *dropdownMenu class="dropdown-menu">
                   <div class=" dropdown-item  form-check form-check-inline mr-1" id="pattern-radios">
                     <input (change)="pattern($event)" checked class="phylotree-layout-mode" data-mode="linear"
                            id="linear"
                            name="pat_op" title="Layout left-to-right" type="radio" value="linear">
-                    <label class="form-check-label btn-success btn-sm" for="linear">Linear</label>
+                    <label class="form-check-label" for="linear">Linear</label>
                   </div>
                   <div class=" dropdown-item form-check form-check-inline mr-1">
                     <input (change)="pattern($event)" class="phylotree-layout-mode" data-mode="radial" id="radial"
                            name="pat_op" title="Layout radially" type="radio" value="radial">
-                    <label class="form-check-label btn-success btn-sm" for="radial">Radial</label>
+                    <label class="form-check-label " for="radial">Radial</label>
                   </div>
                   <div class=" dropdown-item  form-check form-check-inline mr-1">
                     <input (change)="pattern($event)" class="phylotree-layout-mode" data-mode="straight" id="straight"
                            name="pat_op" title="Layout radially" type="radio" value="straight">
-                    <label class="form-check-label btn-success btn-sm" for="straight">Slanted</label>
+                    <label class="form-check-label " for="straight">Slanted</label>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="col-4">
-              <button (click)="displayBranchLengths(!dis_bl)" class="btn btn-success btn-sm">Display branch
+              <button (click)="displayBranchLengths(!dis_bl)" class="btn  btn-sm">Display branch
                 lengths<span
                   class="caret"></span></button>
             </div>
             <div class="col-sm-auto">
-              <button (click)="saveToDrive()" class="btn btn-primary btn-sm">Save To Drive<span
+              <button (click)="saveToDrive()" class="btn  btn-sm">Save To Drive<span
                   class="caret"></span></button>
             </div>
           </div>

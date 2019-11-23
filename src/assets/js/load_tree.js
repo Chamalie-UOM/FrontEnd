@@ -266,7 +266,7 @@ function load(newick_content) {
         .scale(1.2)
         .on("zoom", zoomed);
 
-    var enable_zoom = false;
+  /**var enable_zoom = false;
 
     $("#enable_zoom").on("click", function (e) {
         if (enable_zoom == false) {
@@ -275,7 +275,7 @@ function load(newick_content) {
         else {
             enable_zoom = false;
         }
-    });
+    });**/
 
     $("#zoom_plus").on("click", function (e) {
         if ((zoom_value * 1.2) <= 3) {
